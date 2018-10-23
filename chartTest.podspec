@@ -1,4 +1,4 @@
-@version = "0.1.1"
+@version = "0.1.2"
 
 Pod::Spec.new do |s|
   s.name          = "chartTest"
