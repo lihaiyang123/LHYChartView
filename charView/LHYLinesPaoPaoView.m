@@ -54,12 +54,6 @@
 //        make.top.left.bottom.right.equalTo(self);
 //    }];
 }
-
--(void)setFrame:(CGRect)frame{
-    super.frame = frame;
-    [self.listTb setFrame:CGRectMake(0, 0, CGRectGetWidth(self.frame), CGRectGetHeight(self.frame))];
-}
-
 - (void)show:(NSArray *)dataArr and:(NSString *)title andTitleColor:(UIColor *)titleColor colorArr:(NSArray *)color {
     self.maxLeftTitleWidth = 0;
     NSMutableArray *titleArray = [NSMutableArray array];
@@ -155,7 +149,7 @@
 }
 - (UITableView *)listTb {
     if (!_listTb) {
-        _listTb = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.frame), CGRectGetHeight(self.frame)) style:UITableViewStylePlain];
+        _listTb = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, 0, 0) style:UITableViewStylePlain];
         _listTb.backgroundColor = [UIColor clearColor];
         _listTb.separatorStyle = UITableViewCellSeparatorStyleNone;
         _listTb.allowsSelection = NO;

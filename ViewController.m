@@ -50,7 +50,7 @@
     //设置折现效果
     _incomeChartLineView.lineLayerStyle = LRSLineLayerNone;
     //泡泡背景颜色
-    _incomeChartLineView.paopaoBackGroundColor = [self colorWithHexString:@"ffffff"];
+    _incomeChartLineView.paopaoBackGroundColor = [self colorWithHexString:@"00b6b0"];
     //渐变效果的颜色组
     _incomeChartLineView.colors = @[@[[self colorWithHexString:@"#febf83"],[UIColor greenColor]],@[[self colorWithHexString:@"#53d2f8"],[UIColor blueColor]],@[[self colorWithHexString:@"#7211df"],[UIColor redColor]]];
     //渐变开始比例
