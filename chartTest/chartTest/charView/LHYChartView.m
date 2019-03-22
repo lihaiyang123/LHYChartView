@@ -1,9 +1,9 @@
- //
-//  LRSChartView.m
-//  LRSChartView
 //
-//  Created by lihaiyang on 2018/10/23.
-//  Copyright © 2018 lihaiyang. All rights reserved.
+//  LHYChartView.m
+//  LHYChartView
+//
+//  Created by lreson on 16/7/21.
+//  Copyright © 2016年 lreson. All rights reserved.
 //
 
 #import "LHYChartView.h"
@@ -20,32 +20,32 @@
 //    NSArray *tempDataArrOfY = @[@[@"400",@"600",@"500",@"800",@"600",@"700",@"500"]];
 //    NSArray *tempDataArrOfY1 = @[@[@"30",@"50",@"30",@"90",@"40",@"50",@"40"]];
 //
-//    _incomeChartLineView = [[LRSChartView alloc]initWithFrame:CGRectMake(0, 40, Main_Screen_Width, 300)];
+//    _incomeChartLineView = [[LHYChartView alloc]initWithFrame:CGRectMake(0, 40, Main_Screen_Width, 300)];
 //    //设置X轴坐标字体大小
 //    _incomeChartLineView.x_Font = [UIFont systemFontOfSize:10];
 //    //设置X轴坐标字体颜色
-//    _incomeChartLineView.x_Color = [self colorWithHexString:@"0x999999"];
+//    _incomeChartLineView.x_Color = [UIColor colorWithHexString:@"0x999999"];
 //    //设置Y轴坐标字体大小
 //    _incomeChartLineView.y_Font = [UIFont systemFontOfSize:10];
 //    //设置Y轴坐标字体颜色
-//    _incomeChartLineView.y_Color = [self colorWithHexString:@"0x999999"];
+//    _incomeChartLineView.y_Color = [UIColor colorWithHexString:@"0x999999"];
 //    //设置X轴数据间隔
 //    _incomeChartLineView.Xmargin = 50;
 //
 //    _incomeChartLineView.backgroundColor = [UIColor clearColor];
 //    //设置折线样式
-//    _incomeChartLineView.chartViewStyle = LRSChartViewLeftRightLine;
+//    _incomeChartLineView.chartViewStyle = LHYChartViewLeftRightLine;
 //    //设置X轴字体大小
 //    _incomeChartLineView.x_Font = [UIFont systemFontOfSize:10];
 //    //设置X轴字体颜色
-//    _incomeChartLineView.x_Color = [self colorWithHexString:@"0x999999"];
+//    _incomeChartLineView.x_Color = [UIColor colorWithHexString:@"0x999999"];
 //    //泡泡是否根据折线浮动
 //    _incomeChartLineView.isFloating = YES;
 //    //折线图数据
 //    _incomeChartLineView.leftDataArr = tempDataArrOfY;
 //    _incomeChartLineView.rightDataArr = tempDataArrOfY1;
 //    //设置图层效果
-//    _incomeChartLineView.chartLayerStyle = LRSChartProjection;
+//    _incomeChartLineView.chartLayerStyle = LHYChartProjection;
 //
 //    _incomeChartLineView.leftColorStrArr = @[@"#febf83"];
 //    _incomeChartLineView.rightColorStrArr = @[@"#53d2f8"];
@@ -56,49 +56,48 @@
 //    [_incomeChartLineView show];
 //    [self.view addSubview:_incomeChartLineView];
 //--------------------------使用方法(单边多条)--------------------------------
-//NSArray *tempDataArrOfY = @[@[@"400",@"600",@"500",@"800",@"600",@"700",@"500",@"500",@"500",@"500"],@[@"300",@"500",@"400",@"700",@"500",@"600",@"400",@"400",@"400",@"400"],@[@"500",@"800",@"300",@"600",@"400",@"500",@"300",@"300",@"300",@"300"]];
+//    NSArray *tempDataArrOfY = @[@[@"400",@"600",@"500",@"800",@"600",@"700",@"500",@"500",@"500",@"500"],@[@"300",@"500",@"400",@"700",@"500",@"600",@"400",@"400",@"400",@"400"],@[@"500",@"800",@"300",@"600",@"400",@"500",@"300",@"300",@"300",@"300"]];
 //
-//_incomeChartLineView = [[LRSChartView alloc]initWithFrame:CGRectMake(20, 100, [UIScreen mainScreen].bounds.size.width - 40, 300)];
-////是否默认显示第一个点
-//_incomeChartLineView.isShowFirstPaoPao = YES;
-////是否可以浮动
-//_incomeChartLineView.isFloating = YES;
-////设置X轴坐标字体大小
-//_incomeChartLineView.x_Font = [UIFont systemFontOfSize:10];
-////设置X轴坐标字体颜色
-//_incomeChartLineView.x_Color = [self colorWithHexString:@"0x999999"];
-////设置Y轴坐标字体大小
-//_incomeChartLineView.y_Font = [UIFont systemFontOfSize:10];
-////设置Y轴坐标字体颜色
-//_incomeChartLineView.y_Color = [self colorWithHexString:@"0x999999"];
-////设置X轴数据间隔
-//_incomeChartLineView.Xmargin = 50;
-////设置背景颜色
-//_incomeChartLineView.backgroundColor = [UIColor clearColor];
-////是否根据折线数据浮动泡泡
-////_incomeChartLineView.isFloating = YES;
-////折线图数据
-//_incomeChartLineView.leftDataArr = tempDataArrOfY;
-////折线图所有颜色
-//_incomeChartLineView.leftColorStrArr = @[@"#febf83",@"#53d2f8",@"#7211df"];
-////设置折线样式
-//_incomeChartLineView.chartViewStyle = LRSChartViewMoreClickLine;
-////设置图层效果
-//_incomeChartLineView.chartLayerStyle = LRSChartGradient;
-////设置折现效果
-//_incomeChartLineView.lineLayerStyle = LRSLineLayerNone;
-////泡泡背景颜色
-//_incomeChartLineView.paopaoBackGroundColor = [self colorWithHexString:@"00b6b0"];
-////渐变效果的颜色组
-//_incomeChartLineView.colors = @[@[[self colorWithHexString:@"#febf83"],[UIColor greenColor]],@[[self colorWithHexString:@"#53d2f8"],[UIColor blueColor]],@[[self colorWithHexString:@"#7211df"],[UIColor redColor]]];
-////渐变开始比例
-//_incomeChartLineView.proportion = 0.5;
-////底部日期
-//_incomeChartLineView.dataArrOfX = @[@"01-13",@"01-14",@"01-15",@"01-16",@"01-17",@"01-18",@"01-19",@"01-20",@"01-21",@"01-22"];
-////开始画图
-//[_incomeChartLineView show];
-//[self.view addSubview:_incomeChartLineView];
+//    DLog(@"%f---------------",Main_Screen_Width);
+//    _incomeChartLineView = [[LHYChartView alloc]initWithFrame:CGRectMake(0, 40, Main_Screen_Width, 300)];
 //
+//
+//    //是否可以浮动
+//    _incomeChartLineView.isFloating = YES;
+//    //设置X轴坐标字体大小
+//    _incomeChartLineView.x_Font = [UIFont systemFontOfSize:10];
+//    //设置X轴坐标字体颜色
+//    _incomeChartLineView.x_Color = [UIColor colorWithHexString:@"0x999999"];
+//    //设置Y轴坐标字体大小
+//    _incomeChartLineView.y_Font = [UIFont systemFontOfSize:10];
+//    //设置Y轴坐标字体颜色
+//    _incomeChartLineView.y_Color = [UIColor colorWithHexString:@"0x999999"];
+//    //设置X轴数据间隔
+//    _incomeChartLineView.Xmargin = 50;
+//    //设置背景颜色
+//    _incomeChartLineView.backgroundColor = [UIColor clearColor];
+//    //是否根据折线数据浮动泡泡
+//    //_incomeChartLineView.isFloating = YES;
+//    //折线图数据
+//    _incomeChartLineView.leftDataArr = tempDataArrOfY;
+//    //折线图所有颜色
+//    _incomeChartLineView.leftColorStrArr = @[@"#febf83",@"#53d2f8",@"#7211df"];
+//    //设置折线样式
+//    _incomeChartLineView.chartViewStyle = LHYChartViewMoreClickLine;
+//    //设置图层效果
+//    _incomeChartLineView.chartLayerStyle = LHYChartProjection;
+//    //设置折现效果
+//    _incomeChartLineView.lineLayerStyle = LHYLineLayerNone;
+//    //渐变效果的颜色组
+//    _incomeChartLineView.colors = @[@[[UIColor colorWithHexString:@"#febf83"],[UIColor greenColor]],@[[UIColor colorWithHexString:@"#53d2f8"],[UIColor blueColor]],@[[UIColor colorWithHexString:@"#7211df"],[UIColor redColor]]];
+//    //渐变开始比例
+//    _incomeChartLineView.proportion = 0.5;
+//    //底部日期
+//    _incomeChartLineView.dataArrOfX = @[@"01-13",@"01-14",@"01-15",@"01-16",@"01-17",@"01-18",@"01-19",@"01-20",@"01-21",@"01-22"];
+//    //开始画图
+//    [_incomeChartLineView show];
+//    [self.view addSubview:_incomeChartLineView];
+
 @interface LHYChartView ()<UIScrollViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,CAAnimationDelegate>
 {
     CGFloat currentPage;//当前页数
@@ -139,6 +138,16 @@
 @property (nonatomic,assign) NSInteger indexPathIndex;
 @property (nonatomic,strong) NSMutableArray * markArray;
 @property (nonatomic,strong) CAShapeLayer * dashLayer;
+//最后点击
+@property (nonatomic,assign) NSInteger lastIndex;
+//是否是刷新
+@property (nonatomic,assign) BOOL reLoading;
+//记录滚动位置
+@property (nonatomic,assign) CGPoint contentOffset;
+//最后一次点击的坐标
+@property (nonatomic,strong) NSValue * lastValue;
+//选中的泡泡Tag
+@property (nonatomic,assign) NSInteger selectTag;
 @end
 
 @implementation LHYChartView
@@ -188,7 +197,7 @@
     self.paopaoBackGroundColor = [UIColor whiteColor];
     self.markColor = [UIColor whiteColor];
     self.paopaoDataArray = [NSArray new];
-    self.unitStyle = LRSUnitDefault;
+    self.unitStyle = LHYUnitDefault;
     self.paopaoTitleArray = [NSArray array];
     self.isSelect = YES;
     self.leftJiange = 1;
@@ -197,7 +206,9 @@
     self.xRow = 7;
     self.isShowYtext = YES;
     self.isShowFirstPaoPao = NO;
-    self.middleLineColor = [self colorWithHexString:@"e0e0e0"];
+    self.unitName = @"";
+    self.selectTag = -1;
+    self.middleLineColor = [UIColor colorWithHexString:@"e0e0e0"];
     UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(viewClick:)];
     [self addGestureRecognizer:tap];
     titleWOfY = 0;
@@ -291,6 +302,7 @@
 
 #pragma -mark -------------scrollViewDelegate----------------
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    self.contentOffset = scrollView.contentOffset;
     if (scrollView == _chartScrollView) {
         _xAxiCollectionView.contentOffset = scrollView.contentOffset;
     }else{
@@ -364,7 +376,7 @@
         }
     }
     NSInteger max = [self getNumber:maxValue];
-    if (_unitStyle == LRSUnitMillion) {
+    if (_unitStyle == LHYUnitMillion) {
         NSInteger maxValueInterger = max / 100000000.f + 0.99;
         NSInteger xMaxValue = maxValueInterger % (_row - 1);
         if (xMaxValue != 0) {
@@ -373,7 +385,7 @@
             xMaxValue = maxValueInterger;
         }
         return xMaxValue / (_row - 1) * 100000000.f;
-    }else if (_unitStyle == LRSUnitWan) {
+    }else if (_unitStyle == LHYUnitWan) {
         NSInteger maxValueInterger = max / 10000.f + 0.99;
         NSInteger xMaxValue = maxValueInterger % (_row - 1);
         if (xMaxValue != 0) {
@@ -382,7 +394,7 @@
             xMaxValue = maxValueInterger;
         }
         return xMaxValue / (_row - 1) * 10000.f;
-    }else if (_unitStyle == LRSUnitThousand) {
+    }else if (_unitStyle == LHYUnitThousand) {
         NSInteger maxValueInterger = max / 1000.f + 0.99;
         NSInteger xMaxValue = maxValueInterger % (_row - 1);
         if (xMaxValue != 0) {
@@ -391,7 +403,7 @@
             xMaxValue = maxValueInterger;
         }
         return xMaxValue / (_row - 1) * 1000.f;
-    }else if (_unitStyle == LRSUnitMoneyDefault) {
+    }else if (_unitStyle == LHYUnitMoneyDefault) {
         if (max == 0) {
             return 10000.f;
         }
@@ -429,9 +441,9 @@
             xMaxValue = maxValueInterger;
         }
         if (max >= 1000) {
-             return xMaxValue / (_row - 1) * 100;
+            return xMaxValue / (_row - 1) * 100;
         }
-         return xMaxValue / (_row - 1);
+        return xMaxValue / (_row - 1);
     }
 }
 // 只取小数点之前的数字
@@ -442,11 +454,29 @@
 }
 #pragma mark ----------显示---------------
 -(void)show{
+    self.reLoading = NO;
+    self.contentOffset = CGPointMake(0, 0);
+    self.lastIndex = 0;
+    [self onLoading];
+}
+
+-(void)reShow{
+    self.reLoading = YES;
+    self.selectIndex = -1;
+    [self onLoading];
+}
+
+-(void)onLoading{
     if (_dashLayer) {
         [_dashLayer removeFromSuperlayer];
         _dashLayer = nil;
     }
     [self.chartScrollView removeFromSuperview];
+    [self.xAxiCollectionView removeFromSuperview];
+    [self.paopaoView removeFromSuperview];
+    self.chartScrollView = nil;
+    self.xAxiCollectionView = nil;
+    self.paopaoView = nil;
     [self colorConversion];
     self.selectView = nil;
     ////添加连线
@@ -465,18 +495,40 @@
         default:
             break;
     }
-    
-    if (self.leftPointArr.count > 0) {
-        NSArray * pointArray = self.leftPointArr[0];
-        if (self.isShowFirstPaoPao && pointArray.count > 0) {
-            NSValue * point = pointArray[0];
-            [self viewClick:point];
-            if (self.paopaoView.hidden) {
-                [self viewClick:point];
+    [_chartScrollView setContentOffset:self.contentOffset];
+    if (!self.reLoading) {
+        if (self.leftPointArr.count > 0) {
+            NSArray * pointArray = self.leftPointArr[0];
+            if (self.isShowFirstPaoPao && pointArray.count > 0) {
+                NSValue * pointValue = pointArray[0];
+                CGPoint point = [pointValue CGPointValue];
+                point.x += titleWOfY;
+                [self viewClick:[NSValue valueWithCGPoint:point]];
+                if (self.paopaoView.hidden) {
+                    [self viewClick:[NSValue valueWithCGPoint:point]];
+                }
+            }
+            if (self.isShowLastPaoPao && pointArray.count > 0) {
+                CGFloat contentSizeWidth = self.chartScrollView.contentSize.width;
+                CGFloat offsetX = contentSizeWidth - CGRectGetWidth(self.chartScrollView.frame);
+                CGPoint contentPoint = CGPointMake(offsetX < 0 ? 0 : offsetX, 0);
+                [self.chartScrollView setContentOffset:contentPoint];
+            }
+        }
+    }else{
+        if (self.leftPointArr.count > 0) {
+            if (self.lastIndex) {
+                CGPoint point = self.lastValue.CGPointValue;
+                self.lastValue = [NSValue valueWithCGPoint:point];
+                point.x -= titleWOfY;
+                if (self.selectTag >= 0) {
+                    [self drawOtherLin:self.selectTag AndPoint:point];
+                }
             }
         }
     }
 }
+
 //转换颜色
 -(void)colorConversion{
     NSMutableArray * colorArray = [NSMutableArray array];
@@ -486,7 +538,7 @@
             color = obj;
         }else{
             NSString * colorStr = obj;
-            color = [self colorWithHexString:colorStr];
+            color = [UIColor colorWithHexString:colorStr];
         }
         [colorArray addObject:color];
     }
@@ -498,10 +550,20 @@
             color = obj;
         }else{
             NSString * colorStr = obj;
-            color = [self colorWithHexString:colorStr];
+            color = [UIColor colorWithHexString:colorStr];
         }
         [colorArray addObject:color];
     }
+    //    for (id obj in _colors) {
+    //        UIColor * color;
+    //        if ([obj isKindOfClass:[UIColor class]]) {
+    //            color = obj;
+    //        }else{
+    //            NSString * colorStr = obj;
+    //            color = [UIColor colorWithHexString:colorStr];
+    //        }
+    //        [colorArray addObject:color];
+    //    }
     _rightColorStrArr = [NSArray arrayWithArray:colorArray];
 }
 //显示左右两种标线
@@ -509,26 +571,38 @@
     [self.leftPointArr removeAllObjects];
     
     if (_leftDataArr.count > 0) {
-        if (_unitStyle == LRSUnitThousand) {
-            _jiange = 1000;
-            _leftJiange = 1000;
-        }else if (_unitStyle == LRSUnitWan){
-            _jiange = 10000;
-            _leftJiange = 10000;
-        }else if (_unitStyle == LRSUnitMillion){
-            _jiange = 100000000;
-            _leftJiange = 100000000;
-        }else{
-            _jiange = 1;
-            _leftJiange = 1;
+        if (!self.reLoading) {
+            if (_unitStyle == LHYUnitThousand) {
+                _jiange = 1000;
+                _leftJiange = 1000;
+            }else if (_unitStyle == LHYUnitWan){
+                _jiange = 10000;
+                _leftJiange = 10000;
+            }else if (_unitStyle == LHYUnitMillion){
+                _jiange = 100000000;
+                _leftJiange = 100000000;
+            }else{
+                _jiange = 1;
+                _leftJiange = 1;
+            }
         }
-        for (int i = 0; i < _leftDataArr.count; i++) {
-            CGFloat jiange = [self spaceValue:_leftDataArr[i]];
+        if (self.max) {
+            CGFloat jiange = [self spaceValue:@[[NSString stringWithFormat:@"%f",self.max]]];
             if (jiange > _leftJiange) {
                 _leftJiange = jiange;
             }
             if (jiange > _jiange) {
                 _jiange = jiange;
+            }
+        }else{
+            for (int i = 0; i < _leftDataArr.count; i++) {
+                CGFloat jiange = [self spaceValue:_leftDataArr[i]];
+                if (jiange > _leftJiange) {
+                    _leftJiange = jiange;
+                }
+                if (jiange > _jiange) {
+                    _jiange = jiange;
+                }
             }
         }
         [self addLeftViews];
@@ -553,21 +627,32 @@
         }
     }
     if (_rightDataArr.count > 0) {
-        for (int i = 0; i < _rightDataArr.count; i++) {
-            if (_unitStyle == LRSUnitThousand) {
-                _rightJiange = 1000;
-            }else if (_unitStyle == LRSUnitWan){
-                _rightJiange = 10000;
-            }else if (_unitStyle == LRSUnitMillion){
-                _rightJiange = 100000000;
-            }else{
-                _rightJiange = 1;
+        if (self.max) {
+            CGFloat jiange = [self spaceValue:@[[NSString stringWithFormat:@"%f",self.max]]];
+            if (jiange > _leftJiange) {
+                _leftJiange = jiange;
             }
-            CGFloat jiange = [self spaceValue:_rightDataArr[i]];
-            if (jiange > _rightJiange) {
-                _rightJiange = jiange;
+            if (jiange > _jiange) {
+                _jiange = jiange;
             }
-        }		
+        }else{
+            for (int i = 0; i < _rightDataArr.count; i++) {
+                if (_unitStyle == LHYUnitThousand) {
+                    _rightJiange = 1000;
+                }else if (_unitStyle == LHYUnitWan){
+                    _rightJiange = 10000;
+                }else if (_unitStyle == LHYUnitMillion){
+                    _rightJiange = 100000000;
+                }else{
+                    _rightJiange = 1;
+                }
+                CGFloat jiange = [self spaceValue:_rightDataArr[i]];
+                if (jiange > _rightJiange) {
+                    _rightJiange = jiange;
+                }
+            }
+        }
+        
         [self addLeftViews];
         [self setChartViewContentSize];
         [self calculateLeftLabelMaxWidth];
@@ -610,7 +695,7 @@
 }
 
 -(void)setChartViewContentSize{
-    CGFloat chartScrollViewwidth = _chartViewStyle == LRSChartViewLeftRightLine ? self.bounds.size.width-titleWOfY * 2 :self.bounds.size.width-titleWOfY;
+    CGFloat chartScrollViewwidth = _chartViewStyle == LHYChartViewLeftRightLine ? self.bounds.size.width-titleWOfY * 2 :self.bounds.size.width-titleWOfY;
     CGFloat xMargin = chartScrollViewwidth / (_xRow - 1);
     if (self.dataArrOfX.count > 0) {
         self.chartScrollView.contentSize = CGSizeMake(xMargin*(self.dataArrOfX.count + 1), 0);
@@ -628,7 +713,7 @@
 #pragma mark *******************分割线************************
 -(void)addDetailViews{
     CGFloat width = 0;
-    width = _chartViewStyle == LRSChartViewLeftRightLine ? self.bounds.size.width-titleWOfY * 2 :self.bounds.size.width-titleWOfY;
+    width = _chartViewStyle == LHYChartViewLeftRightLine ? self.bounds.size.width-titleWOfY * 2 :self.bounds.size.width-titleWOfY;
     self.chartScrollView = [[YJYTouchScroll alloc]initWithFrame:CGRectMake(titleWOfY, 0, width, chartViewHeight)];
     self.chartScrollView.backgroundColor = [UIColor clearColor];
     self.chartScrollView.bounces = NO;
@@ -699,13 +784,27 @@
     strokeAnmi.delegate = self;
     strokeAnmi.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
     strokeAnmi.autoreverses = NO;
-    [_percentLayer addAnimation:strokeAnmi forKey:@"stroke"];
+    if (!self.reLoading) [_percentLayer addAnimation:strokeAnmi forKey:@"stroke"];
 }
 //等动画结束之后的操作
 -(void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag
 {
     if (_isShow) {
         [self drawCircleArr:self.leftPointArr color:self.leftColorStrArr];
+    }
+    //是否动画结束后显示最后一条数据
+    if (!self.leftPointArr || !self.leftPointArr.count) return;
+    NSArray * pointArray = self.leftPointArr[0];
+    if (self.isShowLastPaoPao && pointArray.count > 0) {
+        CGPoint point = [pointArray[pointArray.count - 1] CGPointValue];
+        if (point.x >= CGRectGetWidth(self.chartScrollView.frame)) {
+            point.x = [pointArray[self.xRow - 3] CGPointValue].x;
+        }
+        point.x += titleWOfY;
+        NSValue * value = [NSValue valueWithCGPoint:point];
+        if (!self.paopaoView || !CGRectGetWidth(self.paopaoView.frame) || self.paopaoView.hidden) {
+            [self viewClick:value];
+        }
     }
 }
 #pragma mark ----------绘画折现----------------
@@ -714,7 +813,12 @@
         return;
     }
     //取得起始点
-    CGPoint startP = [[pointArray objectAtIndex:0] CGPointValue];
+    CGPoint startP = CGPointMake(0, 0);
+    if (!self.hiddenZreo) {
+        startP = [[pointArray objectAtIndex:0] CGPointValue];
+    }else{
+        startP = [[pointArray objectAtIndex:1] CGPointValue];
+    }
     //直线的连线
     UIBezierPath *lineBeizer = [UIBezierPath bezierPath];
     [lineBeizer moveToPoint:startP];
@@ -725,18 +829,47 @@
     shelterBezier.lineJoinStyle = kCGLineJoinMiter;
     [shelterBezier moveToPoint:startP];
     for (int i = 0;i<pointArray.count;i++ ) {
-        if (i != 0) {
-            CGPoint prePoint = [[pointArray objectAtIndex:i-1] CGPointValue];
-            CGPoint nowPoint = [[pointArray objectAtIndex:i] CGPointValue];
-            //            [beizer addLineToPoint:point];
-            [lineBeizer addCurveToPoint:nowPoint controlPoint1:CGPointMake((nowPoint.x+prePoint.x)/2, prePoint.y) controlPoint2:CGPointMake((nowPoint.x+prePoint.x)/2, nowPoint.y)];
-            if (_chartLayerStyle == LRSChartGradient) [shelterBezier addCurveToPoint:nowPoint controlPoint1:CGPointMake((nowPoint.x+prePoint.x)/2, prePoint.y) controlPoint2:CGPointMake((nowPoint.x+prePoint.x)/2, nowPoint.y)];
-            if (i == pointArray.count-1) {
-                [lineBeizer moveToPoint:nowPoint];//添加连线
-                lastPoint = nowPoint;
+        if (!self.hiddenZreo) {
+            if (i > 0) {
+                CGPoint prePoint = [[pointArray objectAtIndex:i-1] CGPointValue];
+                CGPoint nowPoint = [[pointArray objectAtIndex:i] CGPointValue];
+                //            [beizer addLineToPoint:point];
+                [lineBeizer addCurveToPoint:nowPoint controlPoint1:CGPointMake((nowPoint.x+prePoint.x)/2, prePoint.y) controlPoint2:CGPointMake((nowPoint.x+prePoint.x)/2, nowPoint.y)];
+                if (_chartLayerStyle == LHYChartGradient) [shelterBezier addCurveToPoint:nowPoint controlPoint1:CGPointMake((nowPoint.x+prePoint.x)/2, prePoint.y) controlPoint2:CGPointMake((nowPoint.x+prePoint.x)/2, nowPoint.y)];
+                if (i == pointArray.count-1) {
+                    [lineBeizer moveToPoint:nowPoint];//添加连线
+                    lastPoint = nowPoint;
+                }
+            }
+        }else{
+            if (pointArray.count > 2) {
+                if (i > 1) {
+                    CGPoint prePoint = [[pointArray objectAtIndex:i-1] CGPointValue];
+                    CGPoint nowPoint = [[pointArray objectAtIndex:i] CGPointValue];
+                    //            [beizer addLineToPoint:point];
+                    [lineBeizer addCurveToPoint:nowPoint controlPoint1:CGPointMake((nowPoint.x+prePoint.x)/2, prePoint.y) controlPoint2:CGPointMake((nowPoint.x+prePoint.x)/2, nowPoint.y)];
+                    if (_chartLayerStyle == LHYChartGradient) [shelterBezier addCurveToPoint:nowPoint controlPoint1:CGPointMake((nowPoint.x+prePoint.x)/2, prePoint.y) controlPoint2:CGPointMake((nowPoint.x+prePoint.x)/2, nowPoint.y)];
+                    if (i == pointArray.count-1) {
+                        [lineBeizer moveToPoint:nowPoint];//添加连线
+                        lastPoint = nowPoint;
+                    }
+                }
+            }else{
+                if (i > 0) {
+                    CGPoint prePoint = [[pointArray objectAtIndex:i] CGPointValue];
+                    CGPoint nowPoint = [[pointArray objectAtIndex:i] CGPointValue];
+                    nowPoint.x +=1;
+                    [lineBeizer addCurveToPoint:nowPoint controlPoint1:CGPointMake((nowPoint.x+prePoint.x)/2, prePoint.y) controlPoint2:CGPointMake((nowPoint.x+prePoint.x)/2, nowPoint.y)];
+                    if (_chartLayerStyle == LHYChartGradient) [shelterBezier addCurveToPoint:nowPoint controlPoint1:CGPointMake((nowPoint.x+prePoint.x)/2, prePoint.y) controlPoint2:CGPointMake((nowPoint.x+prePoint.x)/2, nowPoint.y)];
+                    if (i == pointArray.count-1) {
+                        [lineBeizer moveToPoint:nowPoint];//添加连线
+                        lastPoint = nowPoint;
+                    }
+                }
             }
         }
     }
+    
     CGFloat bgViewHeight = self.chartScrollView.bounds.size.height;
     //获取最后一个点的X值
     CGFloat lastPointX = lastPoint.x;
@@ -753,7 +886,7 @@
         [self buildBGCircleLayer:colors];
         return;
     }
-//    //*****************添加动画连线******************//
+    //    //*****************添加动画连线******************//
     CAShapeLayer *shapeLayer = [CAShapeLayer layer];
     shapeLayer.path = lineBeizer.CGPath;
     shapeLayer.fillColor = [UIColor clearColor].CGColor;
@@ -783,7 +916,7 @@
     strokeAnmi.delegate = self;
     strokeAnmi.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
     strokeAnmi.autoreverses = NO;
-    [shapeLayer addAnimation:strokeAnmi forKey:@"stroke"];
+    if (!self.reLoading) [shapeLayer addAnimation:strokeAnmi forKey:@"stroke"];
 }
 #pragma mark    ------------渐变图层---------------
 -(void)addGradientWithBezierPath:(UIBezierPath *)beizer andColor:(UIColor *)color{
@@ -802,12 +935,10 @@
     CALayer *baseLayer = [CALayer layer];
     [baseLayer addSublayer:gradientLayer];
     [baseLayer setMask:shadeLayer];
-    UIView * view = [[UIView alloc]initWithFrame:CGRectMake(0, 40, self.chartScrollView.bounds.size.width-5, self.chartScrollView.bounds.size.height)];
-    [self.chartScrollView addSubview:view];
     [self.chartScrollView.layer addSublayer:baseLayer];
     CABasicAnimation *boundsAnmi = [CABasicAnimation animation];
     boundsAnmi.keyPath = @"bounds";
-    boundsAnmi.duration = 2.f;
+    boundsAnmi.duration = self.reLoading ? 0.0001f : 2.f;
     boundsAnmi.toValue = [NSValue valueWithCGRect:CGRectMake(5, 0, 2*lastPoint.x, self.chartScrollView.bounds.size.height)];
     boundsAnmi.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
     boundsAnmi.fillMode = kCAFillModeForwards;
@@ -815,6 +946,7 @@
     boundsAnmi.autoreverses = NO;
     boundsAnmi.removedOnCompletion = NO;
     [gradientLayer addAnimation:boundsAnmi forKey:@"bounds"];
+    
 }
 #pragma mark ----------获取所有坐标点-------------
 -(NSMutableArray *)addDataPointWith:(UIView *)view andArr:(NSArray *)DataArr andInterval:(CGFloat)interval{
@@ -827,7 +959,8 @@
         float tempHeight = [arr[i] floatValue] / (interval * (_row - 1)) ;
         NSValue *point = [NSValue valueWithCGPoint:CGPointMake(xMargin * i + xMargin, (height *(1 - tempHeight) + 13))];
         if (i == 0) {
-            NSValue *point1 = [NSValue valueWithCGPoint:CGPointMake(0 , (height + 13))];
+            //            NSValue *point1 = [NSValue valueWithCGPoint:CGPointMake(0 , (height + 13))];
+            NSValue *point1 = [NSValue valueWithCGPoint:CGPointMake(0 , (height *(1 - tempHeight) + 13))];
             [marr addObject:point1];
         }
         [marr addObject:point];
@@ -840,25 +973,25 @@
     CGFloat labelWidth = 0;
     switch (_chartViewStyle) {
         case 0:
-            textWidth = [self measureSinglelineStringWidth:[self unitValue:_jiange * (_row - 1)] andFont:_y_Font];
+            textWidth = [NSString measureSinglelineStringWidth:[self unitValue:_jiange * (_row - 1)] andFont:_y_Font];
             break;
         case 1:
-            textWidth = [self measureSinglelineStringWidth:[self unitValue:_jiange * (_row - 1)] andFont:_y_Font];
+            textWidth = [NSString measureSinglelineStringWidth:[self unitValue:_jiange * (_row - 1)] andFont:_y_Font];
             break;
         case 2:
-            textWidth = [self measureSinglelineStringWidth:[self unitValue:_leftJiange * (_row - 1)] andFont:_y_Font];
+            textWidth = [NSString measureSinglelineStringWidth:[self unitValue:_leftJiange * (_row - 1)] andFont:_y_Font];
             break;
         default:
             break;
     }
-    if (_unitStyle == LRSUnitMoneyPercentage) {
-        textWidth = [self measureSinglelineStringWidth:@"100%" andFont:_y_Font];
+    if (_unitStyle == LHYUnitMoneyPercentage) {
+        textWidth = [NSString measureSinglelineStringWidth:@"100%" andFont:_y_Font];
     }
     if (_isShowYtext) labelWidth = textWidth + 2 > labelWidth ? textWidth + 2 : labelWidth;
     titleWOfY = labelWidth;
     [self.markArray removeAllObjects];
     CGFloat topHeight = 13;
-    CGFloat chartScrollViewwidth = _chartViewStyle == LRSChartViewLeftRightLine ? self.bounds.size.width-labelWidth * 2 :self.bounds.size.width-labelWidth;
+    CGFloat chartScrollViewwidth = _chartViewStyle == LHYChartViewLeftRightLine ? self.bounds.size.width-labelWidth * 2 :self.bounds.size.width-labelWidth;
     for (NSInteger i = 0;i< _row ;i++ ) {
         UILabel * leftLabel = [self viewWithTag:1000 + i + 1];
         CGFloat height = CGRectGetHeight(self.chartScrollView.frame) - topHeight;
@@ -870,7 +1003,7 @@
         [leftLabel setFrame:frame];
         leftLabel.font = _y_Font;
         leftLabel.textColor = _y_Color;
-        if (_unitStyle == LRSUnitMoneyPercentage) {
+        if (_unitStyle == LHYUnitMoneyPercentage) {
             leftLabel.text = [NSString stringWithFormat:@"%.0f%%",100.0 / (_row - 1) * i];
         }else{
             switch (_chartViewStyle) {
@@ -887,38 +1020,41 @@
                     break;
             }
         }
-        
         if (i > 0 && self.isShowYtext) [self addSubview:leftLabel];
-        CGFloat xMargin = chartScrollViewwidth / (_xRow - 1);
-        CGFloat width = 0;
-        if (xMargin*(self.dataArrOfX.count + 1) < chartScrollViewwidth){
-            width = chartScrollViewwidth;
-        }else{
-            width = xMargin*(self.dataArrOfX.count + 1);
-        }
-        UIView * crossView = [[UIView alloc] initWithFrame:CGRectMake(0,topHeight + height - height / (_row - 1) * i + 0.5,width, 0.5)];
-        crossView.backgroundColor = _middleLineColor;
-        [self.chartScrollView addSubview:crossView];
-        if (i != 0) {
-            UIView * markCrossView = [[UIView alloc] initWithFrame:CGRectMake(0,topHeight + height - height / (_row - 1) * i + 0.5,8, 0.5)];
-            markCrossView.backgroundColor = _borderLineColor;
-            [self.chartScrollView addSubview:markCrossView];
-            [self.markArray addObject:markCrossView];
+        if (self.isGrid){
+            CGFloat xMargin = chartScrollViewwidth / (_xRow - 1);
+            CGFloat width = 0;
+            if (xMargin*(self.dataArrOfX.count + 1) < chartScrollViewwidth){
+                width = chartScrollViewwidth;
+            }else{
+                width = xMargin*(self.dataArrOfX.count + 1);
+            }
+            UIView * crossView = [[UIView alloc] initWithFrame:CGRectMake(0,topHeight + height - height / (_row - 1) * i + 0.5,width, 0.5)];
+            crossView.backgroundColor = _middleLineColor;
+            [self.chartScrollView addSubview:crossView];
+            if (i != 0) {
+                UIView * markCrossView = [[UIView alloc] initWithFrame:CGRectMake(0,topHeight + height - height / (_row - 1) * i + 0.5,8, 0.5)];
+                markCrossView.backgroundColor = _borderLineColor;
+                [self.chartScrollView addSubview:markCrossView];
+                [self.markArray addObject:markCrossView];
+            }
         }
     }
-    if (!self.dataArrOfX || self.dataArrOfX.count == 0 || (self.dataArrOfX.count > 0 && chartScrollViewwidth / (self.xRow - 1)*(self.dataArrOfX.count - 1) <= chartScrollViewwidth + 1)) {
-        CGFloat verticalX = 0;
-        while (verticalX <= chartScrollViewwidth) {
-            UIView * vertical = [[UIView alloc] initWithFrame:CGRectMake(verticalX - 0.5,topHeight,0.5, CGRectGetHeight(self.chartScrollView.frame) - topHeight)];
-            vertical.backgroundColor = _middleLineColor;
-            [self.chartScrollView addSubview:vertical];
-            verticalX += chartScrollViewwidth / (self.xRow - 1);
-        }
-    }else{
-        for (int i = 0; i < self.dataArrOfX.count + 2; i++) {
-            UIView * vertical = [[UIView alloc] initWithFrame:CGRectMake(chartScrollViewwidth / (self.xRow - 1) * i - 0.5,topHeight,0.5, CGRectGetHeight(self.chartScrollView.frame)- topHeight)];
-            vertical.backgroundColor = _middleLineColor;
-            [self.chartScrollView addSubview:vertical];
+    if (self.isGrid) {
+        if (!self.dataArrOfX || self.dataArrOfX.count == 0 || (self.dataArrOfX.count > 0 && chartScrollViewwidth / (self.xRow - 3)*(self.dataArrOfX.count - 1) <= chartScrollViewwidth + 1)) {
+            CGFloat verticalX = 0;
+            while (verticalX <= chartScrollViewwidth + 0.5) {
+                UIView * vertical = [[UIView alloc] initWithFrame:CGRectMake(verticalX - 0.5,topHeight,0.5, CGRectGetHeight(self.chartScrollView.frame) - topHeight)];
+                vertical.backgroundColor = _middleLineColor;
+                [self.chartScrollView addSubview:vertical];
+                verticalX += chartScrollViewwidth / (self.xRow - 1);
+            }
+        }else{
+            for (int i = 0; i < self.dataArrOfX.count + 2; i++) {
+                UIView * vertical = [[UIView alloc] initWithFrame:CGRectMake(chartScrollViewwidth / (self.xRow - 1) * i - 0.5,topHeight,0.5, CGRectGetHeight(self.chartScrollView.frame)- topHeight)];
+                vertical.backgroundColor = _middleLineColor;
+                [self.chartScrollView addSubview:vertical];
+            }
         }
     }
 }
@@ -940,16 +1076,17 @@
                 break;
         }
     }
-    CGFloat width = _chartViewStyle == LRSChartViewLeftRightLine ? self.bounds.size.width-titleWOfY * 2 :self.bounds.size.width-titleWOfY;
+    CGFloat width = _chartViewStyle == LHYChartViewLeftRightLine ? self.bounds.size.width-titleWOfY * 2 :self.bounds.size.width-titleWOfY;
     [_chartScrollView setFrame:CGRectMake(titleWOfY, 0, width, chartViewHeight)];
     [_xAxiCollectionView setFrame:CGRectMake(CGRectGetMinX(_chartScrollView.frame), CGRectGetMaxY(_chartScrollView.frame) + 10, CGRectGetWidth(self.frame) - CGRectGetMinX(_chartScrollView.frame), 20)];
 }
 
 -(NSString *)unitValue:(CGFloat)value{
     CGFloat returnValue = 0;
-    
-    if (_unitStyle == 0 || _unitStyle == LRSUnitDefault) {
+    if (_unitStyle == LHYUnitGe || _unitStyle == LHYUnitDefault) {
         returnValue = value;
+    }else if (_unitStyle == LHYUnitMoneyPercentageDefault){
+        return [NSString stringWithFormat:@"%.0f%%",value];
     }else if (_unitStyle == 1) {
         returnValue = value / 1000;
     }else if (_unitStyle == 2){
@@ -958,15 +1095,15 @@
         returnValue = value / 100000000;
     }else if (_unitStyle == 4){
         if (value >= 100000000) {
-            return [NSString stringWithFormat:@"%.1f亿",value / 100000000];
+            return [NSString stringWithFormat:@"%.1f亿%@",value / 100000000,self.unitName];
         }else{
-            return [NSString stringWithFormat:@"%.1f万",value / 10000];
+            return [NSString stringWithFormat:@"%.1f万%@",value / 10000,self.unitName];
         }
     }
     if (returnValue >= 1000) {
-        return [NSString stringWithFormat:@"%.1fk",returnValue / 1000];
+        return [NSString stringWithFormat:@"%.1fk%@",returnValue / 1000,self.unitName];
     }
-    return [NSString stringWithFormat:@"%.0f",returnValue];
+    return [NSString stringWithFormat:@"%.0f%@",returnValue,self.unitName];
 }
 #pragma mark ---------添加右侧Y轴标注--------------
 -(void)addRightViews{
@@ -976,7 +1113,7 @@
         CGRect frame = CGRectMake(CGRectGetWidth(self.frame) - titleWOfY + 5, height - 15*(i + 1) - jiange * i , titleWOfY - 5, 15);
         UILabel *leftLabel = [[UILabel alloc]initWithFrame:frame];
         leftLabel.font = [UIFont systemFontOfSize:10.0f];
-        leftLabel.textColor = [self colorWithHexString:@"0x999999"];
+        leftLabel.textColor = [UIColor colorWithHexString:@"0x999999"];
         leftLabel.textAlignment = NSTextAlignmentLeft;
         leftLabel.text = [NSString stringWithFormat:@"%.0f",_rightJiange * i];
         [self addSubview:leftLabel];
@@ -1022,35 +1159,38 @@
 //}
 -(void)viewClick:(id)sender{
     if (!_isSelect) return;
+    [self colorConversion];
     CGPoint point;
     if ([sender isKindOfClass:[UITapGestureRecognizer class]]) {
         point = [sender locationInView:self];
+        self.lastValue = [NSValue valueWithCGPoint:point];
+        point.x -= titleWOfY;
     }else{
         NSValue * value = sender;
         point = value.CGPointValue;
-        point.x += titleWOfY;
+        self.lastValue = [NSValue valueWithCGPoint:point];
+        point.x -= titleWOfY;
     }
     CGFloat xMargin = CGRectGetWidth(self.chartScrollView.frame) / (_xRow - 1);
-    if (point.x > CGRectGetMinX(self.chartScrollView.frame) && point.x < CGRectGetMaxX(self.chartScrollView.frame) && point.y > CGRectGetMinY(self.chartScrollView.frame) && point.y < CGRectGetMaxY(self.chartScrollView.frame)) {
-        point.x = point.x - CGRectGetMinX(self.chartScrollView.frame) + self.chartScrollView.contentOffset.x;
-        point.y = point.y - CGRectGetMinY(self.chartScrollView.frame) + self.chartScrollView.contentOffset.y;
-        float indexF = (point.x - xMargin / 2) / xMargin;
-        NSInteger index = (point.x - xMargin / 2) / xMargin;
-        float disparity = indexF - index;
-        if (disparity>0.5) {
-            index = index;
+    if (point.x > xMargin / 2 && point.x < CGRectGetMaxX(self.chartScrollView.frame) && point.y > CGRectGetMinY(self.chartScrollView.frame) && point.y < CGRectGetMaxY(self.chartScrollView.frame)) {
+        point.x = point.x + self.chartScrollView.contentOffset.x;
+        point.y = point.y + self.chartScrollView.contentOffset.y;
+        NSInteger index = point.x / xMargin - 1;
+        float indexF = point.x - xMargin * (index + 1);
+        if (indexF>xMargin / 2) {
+            index = index + 1;
         }
+        self.selectTag = index;
         [self drawOtherLin:index AndPoint:point];
         return;
     }
-    if (point.x > CGRectGetMinX(self.xAxiCollectionView.frame) && point.x < CGRectGetMaxX(self.xAxiCollectionView.frame) && point.y > CGRectGetMinY(self.xAxiCollectionView.frame) && point.y < CGRectGetMaxY(self.xAxiCollectionView.frame)) {
-        point.x = point.x - xMargin / 2 - CGRectGetMinX(self.xAxiCollectionView.frame) + self.xAxiCollectionView.contentOffset.x;
-        point.y = point.y - CGRectGetMinY(self.xAxiCollectionView.frame) + self.xAxiCollectionView.contentOffset.y;
-        float indexF = (point.x - xMargin / 2) / xMargin;
-        NSInteger index = (point.x - xMargin / 2) / xMargin;
-        float disparity = indexF - index;
-        if (disparity>0.5) {
-            index = index+1;
+    if (point.x > xMargin / 2 && point.x < CGRectGetMaxX(self.xAxiCollectionView.frame) && point.y > CGRectGetMinY(self.xAxiCollectionView.frame) && point.y < CGRectGetMaxY(self.xAxiCollectionView.frame)) {
+        point.x = point.x + self.xAxiCollectionView.contentOffset.x;
+        point.y = point.y + self.xAxiCollectionView.contentOffset.y;
+        NSInteger index = point.x / xMargin - 1;
+        float indexF = point.x - xMargin * (index + 1);
+        if (indexF>xMargin / 2) {
+            index = index + 1;
         }
         [self drawOtherLin:index AndPoint:point];
         return;
@@ -1064,6 +1204,8 @@
     [self.paopaoView removeFromSuperview];
     self.paopaoView = nil;
     if (self.showSelect && self.selectIndex== index) {
+        self.lastIndex = 0;
+        self.selectTag = -1;
         self.selectView.hidden = YES;
         self.paopaoView.hidden = YES;
         self.indexPathIndex = -1;
@@ -1074,10 +1216,11 @@
         [_xAxiCollectionView reloadData];
         return;
     }
+    self.lastIndex = index + 1;
     self.showSelect = YES;
     self.selectIndex = index;
     self.indexPathIndex = index;
-     [_xAxiCollectionView reloadData];
+    [_xAxiCollectionView reloadData];
     [self setPaopaoUI:index];
 }
 
@@ -1095,7 +1238,7 @@
     self.paopaoView.hidden = NO;
     [self.chartScrollView bringSubviewToFront:self.selectView];
     NSMutableArray *dataArr = [NSMutableArray new];
-    if (_chartViewStyle == LRSChartViewLeftRightLine) {
+    if (_chartViewStyle == LHYChartViewLeftRightLine) {
         if (self.paopaoDataArray.count > 0){
             [self.paopaoDataArray enumerateObjectsUsingBlock:^(NSArray<NSArray *> * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
                 if (index < obj.count) {
@@ -1134,7 +1277,7 @@
         [colorArr addObject:self.leftColorStrArr[i]];
     }
     for (int i = 0; i < self.rightColorStrArr.count ; i++) {
-         [colorArr addObject:self.rightColorStrArr[i]];
+        [colorArr addObject:self.rightColorStrArr[i]];
     }
     CGSize size = [LHYLinesPaoPaoView getWidthAndHeight:dataArr];
     float paopao_x = index * xMargin + xMargin - size.width * 0.5;
@@ -1151,22 +1294,45 @@
     self.paopaoView.margin = xMargin;
     if (paopao_x == 0 && size.width > xMargin) {
         self.paopaoView.beyondLeft = YES;
-    }else if (index * xMargin - size.width * 0.5 > self.chartScrollView.contentSize.width - size.width && size.width > _Xmargin && index * xMargin - size.width * 0.5 > self.chartScrollView.frame.size.width - size.width){
+    }else if ((index + 1) * xMargin + size.width * 0.5 > self.chartScrollView.contentSize.width && size.width > _Xmargin && (index + 1) * xMargin + size.width * 0.5 > self.chartScrollView.frame.size.width){
         self.paopaoView.beyondRight = YES;
     }
     NSArray * colorArray = _paopaoDataColors ? _paopaoDataColors : colorArr;
-    UIColor* titleColor = _paopaoTitleColor ? _paopaoTitleColor : [self colorWithHexString:@"999999"];
+    UIColor* titleColor = _paopaoTitleColor ? _paopaoTitleColor : [UIColor colorWithHexString:@"0x999999"];
     self.paopaoView.chartContentWidth = self.chartScrollView.contentSize.width;
+    NSMutableArray * colorMarray = [NSMutableArray array];
+    if (colorArray.count != dataArr.count) {
+        for (int s = 0; s < self.leftDataArr.count; s++) {
+            NSArray * arr = self.leftDataArr[s];
+            if (arr.count > index) {
+                [colorMarray addObject:colorArr[s]];
+            }
+        }
+    }else{
+        [colorMarray addObjectsFromArray:colorArray];
+    }
     if (self.paopaoTitleArray.count > 0) {
         NSArray * pointArray = self.leftPointArr[0];
+        for (NSArray * arr in self.leftPointArr) {
+            if (index < arr.count) {
+                pointArray = arr;
+                break;
+            }
+        }
         CGPoint showPoint = [pointArray[index] CGPointValue];
         self.paopaoView.pointX = showPoint.x;
-        [self.paopaoView show:dataArr and:self.paopaoTitleArray[index] andTitleColor:titleColor colorArr:colorArray];
+        [self.paopaoView show:dataArr and:self.paopaoTitleArray[index] andTitleColor:titleColor colorArr:colorMarray];
     }else{
         NSArray * pointArray = self.leftPointArr[0];
+        for (NSArray * arr in self.leftPointArr) {
+            if (index < arr.count) {
+                pointArray = arr;
+                break;
+            }
+        }
         CGPoint showPoint = [pointArray[index] CGPointValue];
         self.paopaoView.pointX = showPoint.x;
-        [self.paopaoView show:dataArr and:@"" andTitleColor:titleColor colorArr:colorArray];
+        [self.paopaoView show:dataArr and:@"" andTitleColor:titleColor colorArr:colorMarray];
     }
     [self addCircle:index];
 }
@@ -1222,7 +1388,7 @@
                     pointY = point.y;
                 }
             }else if(i == 0){
-                 [self.paopaoView drawBoxWithDirection:directionTop];
+                [self.paopaoView drawBoxWithDirection:directionTop];
             }
             circleView.backgroundColor = self.isShowCircleOutWhite ? colors[i] : [UIColor whiteColor];
             circleView.layer.cornerRadius = KCircleRadius1;
@@ -1232,6 +1398,8 @@
             self.circleView = circleView;
             [self.chartScrollView addSubview:circleView];
             [self.charCircleViewArr addObject:circleView];
+        }else{
+            [self.paopaoView drawBoxWithDirection:directionTop];
         }
     }
     if (self.isFloating) {
@@ -1258,8 +1426,8 @@
             CGPoint point = [arr[o] CGPointValue];
             UIView * circleView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, KCircleRadius*2, KCircleRadius*2)];
             circleView.center = point;
-            NSString * colorStr = colors[i];
-            circleView.backgroundColor = [self colorWithHexString:colorStr];
+            UIColor * color = colors[i];
+            circleView.backgroundColor = color;
             circleView.layer.cornerRadius = KCircleRadius;
             circleView.layer.borderColor = [UIColor whiteColor].CGColor;
             circleView.layer.borderWidth = 1;
@@ -1290,7 +1458,7 @@
     [path addLineToPoint:CGPointMake(titleWOfY,3)];
     [path moveToPoint:CGPointMake(titleWOfY, CGRectGetHeight(_chartScrollView.frame))];
     [path addLineToPoint:CGPointMake(CGRectGetMaxX(_chartScrollView.frame),CGRectGetHeight(_chartScrollView.frame))];
-    if (_chartViewStyle == LRSChartViewLeftRightLine) {
+    if (_chartViewStyle == LHYChartViewLeftRightLine) {
         [path moveToPoint:CGPointMake(CGRectGetMaxX(_chartScrollView.frame) + 1, CGRectGetHeight(_chartScrollView.frame))];
         [path addLineToPoint:CGPointMake(CGRectGetMaxX(_chartScrollView.frame) + 1,0)];
     }else{
@@ -1301,35 +1469,5 @@
     }
     dashLayer.path = path.CGPath;
     [self.layer addSublayer:dashLayer];
-}
-
--(UIColor*)colorWithHexString:(NSString*)stringToConvert{
-    if([stringToConvert hasPrefix:@"#"])
-    {
-        stringToConvert = [stringToConvert substringFromIndex:1];
-    }
-    NSScanner*scanner = [NSScanner scannerWithString:stringToConvert];
-    unsigned hexNum;
-    if(![scanner scanHexInt:&hexNum])
-    {
-        return nil;
-    }
-    return [self colorWithRGBHex:hexNum];
-}
-
-- (UIColor *)colorWithRGBHex:(UInt32)hex {
-    int r = (hex >> 16) & 0xFF;
-    int g = (hex >> 8) & 0xFF;
-    int b = (hex) & 0xFF;
-    return [UIColor colorWithRed:r / 255.0f
-                           green:g / 255.0f
-                            blue:b / 255.0f
-                           alpha:1.0f];
-}
-
-- (float)measureSinglelineStringWidth:(NSString*)str andFont:(UIFont*)wordFont {
-    if (str == nil) return 0;
-    CGSize measureSize = [str boundingRectWithSize:CGSizeMake(0, 0) options:NSStringDrawingUsesFontLeading attributes:[NSDictionary dictionaryWithObjectsAndKeys:wordFont, NSFontAttributeName, nil] context:nil].size;
-    return ceil(measureSize.width);
 }
 @end

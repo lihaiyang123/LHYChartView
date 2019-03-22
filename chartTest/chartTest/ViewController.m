@@ -10,79 +10,138 @@
 #import "LHYChartView.h"
 @interface ViewController ()
 
-@property (nonatomic,strong) LHYChartView * incomeChartLineView;
 @end
 
 @implementation ViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [self colorWithHexString:@"1c1d20"];
-    NSArray *tempDataArrOfY = @[@[@"400",@"600",@"500",@"800",@"600",@"700",@"500",@"500",@"500",@"500"],@[@"300",@"500",@"400",@"700",@"500",@"600",@"400",@"400",@"400",@"400"],@[@"500",@"800",@"300",@"600",@"400",@"500",@"300",@"300",@"300",@"300"]];
-    
-    _incomeChartLineView = [[LHYChartView alloc]initWithFrame:CGRectMake(20, 100, [UIScreen mainScreen].bounds.size.width - 40, 300)];
-    //是否默认显示第一个点
-    _incomeChartLineView.isShowFirstPaoPao = YES;
+    self.view.backgroundColor = [UIColor whiteColor];
+    [self addFirstChartView];
+    [self addSecondChartView];
+}
+
+-(void)addFirstChartView{
+    LHYChartView *incomeChartLineView = [[LHYChartView alloc]initWithFrame:CGRectMake(20, 50, [UIScreen mainScreen].bounds.size.width - 40, 300)];
+    //是否默认选中第一个
+    incomeChartLineView.isShowFirstPaoPao = YES;
+    //是否有网格
+    incomeChartLineView.isGrid = YES;
     //是否可以浮动
-    _incomeChartLineView.isFloating = YES;
+    incomeChartLineView.isFloating = NO;
+    //显示多少行
+    incomeChartLineView.row = 6;
+    //显示多少列
+    incomeChartLineView.xRow = 6;
     //设置X轴坐标字体大小
-    _incomeChartLineView.x_Font = [UIFont systemFontOfSize:10];
+    incomeChartLineView.x_Font = [UIFont systemFontOfSize:10];
     //设置X轴坐标字体颜色
-    _incomeChartLineView.x_Color = [self colorWithHexString:@"0x999999"];
+    incomeChartLineView.x_Color = [UIColor colorWithHexString:@"#999999"];
     //设置Y轴坐标字体大小
-    _incomeChartLineView.y_Font = [UIFont systemFontOfSize:10];
+    incomeChartLineView.y_Font = [UIFont systemFontOfSize:10];
     //设置Y轴坐标字体颜色
-    _incomeChartLineView.y_Color = [self colorWithHexString:@"0x999999"];
+    incomeChartLineView.y_Color = [UIColor colorWithHexString:@"#999999"];
     //设置X轴数据间隔
-    _incomeChartLineView.Xmargin = 50;
+    incomeChartLineView.Xmargin = 55;
     //设置背景颜色
-    _incomeChartLineView.backgroundColor = [UIColor clearColor];
-    //是否根据折线数据浮动泡泡
-    //_incomeChartLineView.isFloating = YES;
-    //折线图数据
-    _incomeChartLineView.leftDataArr = tempDataArrOfY;
-    //折线图所有颜色
-    _incomeChartLineView.leftColorStrArr = @[@"#febf83",@"#53d2f8",@"#7211df"];
+    incomeChartLineView.backgroundColor = [UIColor whiteColor];
+    //边框标线颜色
+    incomeChartLineView.borderLineColor = [UIColor colorWithHexString:@"#999999"];
+    //中间标线颜色
+    incomeChartLineView.middleLineColor = [UIColor colorWithHexString:@"#cbcbcb" andAlpha:0.5];
+    //边框三角颜色
+    incomeChartLineView.borderTriangleColor = [UIColor colorWithHexString:@"#999999"];
+    //设置泡泡背景颜色
+    incomeChartLineView.paopaoBackGroundColor = [UIColor colorWithHexString:@"#000000" andAlpha:0.85];
+    incomeChartLineView.markColor = [UIColor colorWithHexString:@"#333333"];
+    //设置泡泡的标题颜色
+    incomeChartLineView.paopaoTitleColor = [UIColor whiteColor];
     //设置折线样式
-    _incomeChartLineView.chartViewStyle = LRSChartViewMoreClickLine;
+    incomeChartLineView.chartViewStyle = LHYChartViewMoreClickLine;
     //设置图层效果
-    _incomeChartLineView.chartLayerStyle = LRSChartGradient;
+    incomeChartLineView.chartLayerStyle = LHYChartProjection;
     //设置折现效果
-    _incomeChartLineView.lineLayerStyle = LRSLineLayerNone;
-    //泡泡背景颜色
-    _incomeChartLineView.paopaoBackGroundColor = [self colorWithHexString:@"ffffff"];
+    incomeChartLineView.lineLayerStyle = LHYLineLayerNone;
+    incomeChartLineView.paopaoBackGroundColor = [UIColor colorWithHexString:@"#111111" andAlpha:0.8];
     //渐变效果的颜色组
-    _incomeChartLineView.colors = @[@[[self colorWithHexString:@"#febf83"],[UIColor greenColor]],@[[self colorWithHexString:@"#53d2f8"],[UIColor blueColor]],@[[self colorWithHexString:@"#7211df"],[UIColor redColor]]];
     //渐变开始比例
-    _incomeChartLineView.proportion = 0.5;
+    incomeChartLineView.proportion = 0.5;
+    //折线图是否从零点开始画
+    incomeChartLineView.hiddenZreo = YES;
+    //设置颜色
+    incomeChartLineView.leftColorStrArr = @[@"#6dd89c",@"#00a1eb",@"#bc69e0",@"#385af0"];
+    //折线图数据
+    incomeChartLineView.leftDataArr = @[@[@"25000",@"30907",@"32010",@"33450",@"30069",@"31574",@"30692",@"33156",@"29808",@"31846",@"29772",@"29630"],@[@"46175",@"44915",@"36228",@"50473",@"28811",@"11876",@"23213",@"26847",@"27905",@"9562",@"34263",@"25459"],@[@"20549",@"15981",@"23375",@"20516",@"19208",@"15121",@"13776",@"16282",@"30748",@"26531",@"31298",@"33183"],@[@"11053",@"25811"]];
     //底部日期
-    _incomeChartLineView.dataArrOfX = @[@"01-13",@"01-14",@"01-15",@"01-16",@"01-17",@"01-18",@"01-19",@"01-20",@"01-21",@"01-22"];
+    incomeChartLineView.dataArrOfX = @[@"4月",@"5月",@"6月",@"7月",@"8月",@"9月",@"10月",@"11月",@"12月",@"1月",@"2月",@"3月"];
+    //泡泡标题
+    incomeChartLineView.paopaoTitleArray = @[@"2018-04",@"2018-05",@"2018-06",@"2018-07",@"2018-08",@"2018-09",@"2018-10",@"2018-11",@"2018-12",@"2019-01",@"2019-02",@"2019-03"];
+    //泡泡数据
+    incomeChartLineView.paopaoDataArray = @[@[@"25,000元m²",@"30,907元m²",@"32,010元m²",@"33,450元m²",@"30,069元m²",@"31,574元m²",@"30,692元m²",@"33,156元m²",@"29,808元m²",@"31,846元m²",@"29,772元m²",@"29,630元m²"],@[@"46,175元m²",@"44,915元m²",@"36,228元m²",@"50,473元m²",@"28,811元m²",@"11,876元m²",@"23,213元m²",@"26,847元m²",@"27,905元m²",@"9,562元m²",@"34,263元m²",@"25,459元m²"],@[@"20,549元m²",@"15,981元m²",@"23,375元m²",@"20,516元m²",@"19,208元m²",@"15,121元m²",@"13,776元m²",@"16,282元m²",@"30,748元m²",@"26,531元m²",@"31,298元m²",@"33,183元m²"],@[@"11,053元m²",@"25,811元m²"]];
     //开始画图
-    [_incomeChartLineView show];
-    [self.view addSubview:_incomeChartLineView];
+    [incomeChartLineView show];
+    [self.view addSubview:incomeChartLineView];
 }
 
--(UIColor*)colorWithHexString:(NSString*)stringToConvert{
-    if([stringToConvert hasPrefix:@"#"])
-    {
-        stringToConvert = [stringToConvert substringFromIndex:1];
-    }
-    NSScanner*scanner = [NSScanner scannerWithString:stringToConvert];
-    unsigned hexNum;
-    if(![scanner scanHexInt:&hexNum])
-    {
-        return nil;
-    }
-    return [self colorWithRGBHex:hexNum];
-}
-
-- (UIColor *)colorWithRGBHex:(UInt32)hex {
-    int r = (hex >> 16) & 0xFF;
-    int g = (hex >> 8) & 0xFF;
-    int b = (hex) & 0xFF;
-    return [UIColor colorWithRed:r / 255.0f
-                           green:g / 255.0f
-                            blue:b / 255.0f
-                           alpha:1.0f];
+-(void)addSecondChartView{
+    LHYChartView *incomeChartLineView = [[LHYChartView alloc]initWithFrame:CGRectMake(20, 350, [UIScreen mainScreen].bounds.size.width - 40, 300)];
+    //是否默认选中第一个
+    incomeChartLineView.isShowFirstPaoPao = YES;
+    //是否有网格
+    incomeChartLineView.isGrid = YES;
+    //是否可以浮动
+    incomeChartLineView.isFloating = NO;
+    //显示多少行
+    incomeChartLineView.row = 6;
+    //显示多少列
+    incomeChartLineView.xRow = 6;
+    //设置X轴坐标字体大小
+    incomeChartLineView.x_Font = [UIFont systemFontOfSize:10];
+    //设置X轴坐标字体颜色
+    incomeChartLineView.x_Color = [UIColor colorWithHexString:@"#999999"];
+    //设置Y轴坐标字体大小
+    incomeChartLineView.y_Font = [UIFont systemFontOfSize:10];
+    //设置Y轴坐标字体颜色
+    incomeChartLineView.y_Color = [UIColor colorWithHexString:@"#999999"];
+    //设置X轴数据间隔
+    incomeChartLineView.Xmargin = 55;
+    //设置背景颜色
+    incomeChartLineView.backgroundColor = [UIColor whiteColor];
+    //边框标线颜色
+    incomeChartLineView.borderLineColor = [UIColor colorWithHexString:@"#999999"];
+    //中间标线颜色
+    incomeChartLineView.middleLineColor = [UIColor colorWithHexString:@"#cbcbcb" andAlpha:0.5];
+    //边框三角颜色
+    incomeChartLineView.borderTriangleColor = [UIColor colorWithHexString:@"#999999"];
+    //设置泡泡背景颜色
+    incomeChartLineView.paopaoBackGroundColor = [UIColor colorWithHexString:@"#000000" andAlpha:0.85];
+    incomeChartLineView.markColor = [UIColor colorWithHexString:@"#333333"];
+    //设置泡泡的标题颜色
+    incomeChartLineView.paopaoTitleColor = [UIColor whiteColor];
+    //设置折线样式
+    incomeChartLineView.chartViewStyle = LHYChartViewMoreClickLine;
+    //设置图层效果
+    incomeChartLineView.chartLayerStyle = LHYChartGradient;
+    //设置折现效果
+    incomeChartLineView.lineLayerStyle = LHYLineLayerNone;
+    incomeChartLineView.paopaoBackGroundColor = [UIColor colorWithHexString:@"#111111" andAlpha:0.8];
+    //渐变效果的颜色组
+    //渐变开始比例
+    incomeChartLineView.proportion = 0.5;
+    //折线图是否从零点开始画
+    incomeChartLineView.hiddenZreo = YES;
+    //设置颜色
+    incomeChartLineView.leftColorStrArr = @[@"#6dd89c",@"#00a1eb",@"#bc69e0",@"#385af0"];
+    //折线图数据
+    incomeChartLineView.leftDataArr = @[@[@"25000",@"30907",@"32010",@"33450",@"30069",@"31574",@"30692",@"33156",@"29808",@"31846",@"29772",@"29630"],@[@"46175",@"44915",@"36228",@"50473",@"28811",@"11876",@"23213",@"26847",@"27905",@"9562",@"34263",@"25459"],@[@"20549",@"15981",@"23375",@"20516",@"19208",@"15121",@"13776",@"16282",@"30748",@"26531",@"31298",@"33183"],@[@"11053",@"25811"]];
+    //底部日期
+    incomeChartLineView.dataArrOfX = @[@"4月",@"5月",@"6月",@"7月",@"8月",@"9月",@"10月",@"11月",@"12月",@"1月",@"2月",@"3月"];
+    //泡泡标题
+    incomeChartLineView.paopaoTitleArray = @[@"2018-04",@"2018-05",@"2018-06",@"2018-07",@"2018-08",@"2018-09",@"2018-10",@"2018-11",@"2018-12",@"2019-01",@"2019-02",@"2019-03"];
+    //泡泡数据
+    incomeChartLineView.paopaoDataArray = @[@[@"25,000元m²",@"30,907元m²",@"32,010元m²",@"33,450元m²",@"30,069元m²",@"31,574元m²",@"30,692元m²",@"33,156元m²",@"29,808元m²",@"31,846元m²",@"29,772元m²",@"29,630元m²"],@[@"46,175元m²",@"44,915元m²",@"36,228元m²",@"50,473元m²",@"28,811元m²",@"11,876元m²",@"23,213元m²",@"26,847元m²",@"27,905元m²",@"9,562元m²",@"34,263元m²",@"25,459元m²"],@[@"20,549元m²",@"15,981元m²",@"23,375元m²",@"20,516元m²",@"19,208元m²",@"15,121元m²",@"13,776元m²",@"16,282元m²",@"30,748元m²",@"26,531元m²",@"31,298元m²",@"33,183元m²"],@[@"11,053元m²",@"25,811元m²"]];
+    //开始画图
+    [incomeChartLineView show];
+    [self.view addSubview:incomeChartLineView];
 }
 @end

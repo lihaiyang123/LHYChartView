@@ -95,7 +95,7 @@
         UIView * view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.frame), 23.5)];
         UILabel * titleLab = [[UILabel alloc] initWithFrame:CGRectMake(10, 6.5, CGRectGetWidth(view.frame) - 20, 17)];
         titleLab.font = [UIFont fontWithName:@"Helvetica-Bold" size:13];
-        titleLab.textColor = [self colorWithHexString:@"#d3d3d3"];
+        titleLab.textColor = [UIColor colorWithHexString:@"#d3d3d3"];
         titleLab.text = title;
         titleLab.textColor = titleColor;
         [view addSubview:titleLab];
@@ -264,7 +264,7 @@
     {
         return nil;
     }
-    return [self colorWithRGBHex:hexNum];
+    return [UIColor colorWithRGBHex:hexNum];
 }
 
 - (UIColor *)colorWithRGBHex:(UInt32)hex {

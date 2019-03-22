@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UIColor+expanded.h"
 typedef NS_ENUM(NSInteger,Direction){
     directionTop, //顶部
     directionBottom,  //底部

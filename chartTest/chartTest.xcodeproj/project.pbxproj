@@ -22,6 +22,8 @@
 		C80D94CB217F1F410004AEE1 /* YJYTouchCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = C80D94C1217F1F400004AEE1 /* YJYTouchCollectionView.m */; };
 		C80D94CC217F1F410004AEE1 /* YJYTouchScroll.m in Sources */ = {isa = PBXBuildFile; fileRef = C80D94C3217F1F400004AEE1 /* YJYTouchScroll.m */; };
 		C80D94CD217F1F410004AEE1 /* YJYLinesCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C80D94C5217F1F400004AEE1 /* YJYLinesCell.xib */; };
+		C8A1491A224489B200DA0981 /* UIColor+expanded.m in Sources */ = {isa = PBXBuildFile; fileRef = C8A14919224489B200DA0981 /* UIColor+expanded.m */; };
+		C8A1492622448A1500DA0981 /* NSString+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = C8A1492222448A1500DA0981 /* NSString+Extension.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +73,10 @@
 		C80D94C4217F1F400004AEE1 /* LHYLinesPaoPaoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LHYLinesPaoPaoView.h; sourceTree = "<group>"; };
 		C80D94C5217F1F400004AEE1 /* YJYLinesCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YJYLinesCell.xib; sourceTree = "<group>"; };
 		C80D94C6217F1F400004AEE1 /* LHYChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LHYChartView.h; sourceTree = "<group>"; };
+		C8A14918224489B200DA0981 /* UIColor+expanded.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+expanded.h"; sourceTree = "<group>"; };
+		C8A14919224489B200DA0981 /* UIColor+expanded.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+expanded.m"; sourceTree = "<group>"; };
+		C8A1491D22448A1500DA0981 /* NSString+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Extension.h"; sourceTree = "<group>"; };
+		C8A1492222448A1500DA0981 /* NSString+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Extension.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +127,7 @@
 		C80D9486217F1F230004AEE1 /* chartTest */ = {
 			isa = PBXGroup;
 			children = (
+				C8A14916224489B200DA0981 /* category */,
 				C80D9487217F1F230004AEE1 /* AppDelegate.h */,
 				C80D9488217F1F230004AEE1 /* AppDelegate.m */,
 				C80D948A217F1F230004AEE1 /* ViewController.h */,
@@ -171,6 +178,33 @@
 				C80D94C3217F1F400004AEE1 /* YJYTouchScroll.m */,
 			);
 			path = charView;
+			sourceTree = "<group>";
+		};
+		C8A14916224489B200DA0981 /* category */ = {
+			isa = PBXGroup;
+			children = (
+				C8A1491B22448A1500DA0981 /* NSString */,
+				C8A14917224489B200DA0981 /* UIColor */,
+			);
+			path = category;
+			sourceTree = "<group>";
+		};
+		C8A14917224489B200DA0981 /* UIColor */ = {
+			isa = PBXGroup;
+			children = (
+				C8A14918224489B200DA0981 /* UIColor+expanded.h */,
+				C8A14919224489B200DA0981 /* UIColor+expanded.m */,
+			);
+			path = UIColor;
+			sourceTree = "<group>";
+		};
+		C8A1491B22448A1500DA0981 /* NSString */ = {
+			isa = PBXGroup;
+			children = (
+				C8A1491D22448A1500DA0981 /* NSString+Extension.h */,
+				C8A1492222448A1500DA0981 /* NSString+Extension.m */,
+			);
+			path = NSString;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -304,10 +338,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C8A1491A224489B200DA0981 /* UIColor+expanded.m in Sources */,
 				C80D94C7217F1F410004AEE1 /* YJYLinesCell.m in Sources */,
 				C80D94CB217F1F410004AEE1 /* YJYTouchCollectionView.m in Sources */,
 				C80D948C217F1F230004AEE1 /* ViewController.m in Sources */,
 				C80D94CC217F1F410004AEE1 /* YJYTouchScroll.m in Sources */,
+				C8A1492622448A1500DA0981 /* NSString+Extension.m in Sources */,
 				C80D9497217F1F240004AEE1 /* main.m in Sources */,
 				C80D9489217F1F230004AEE1 /* AppDelegate.m in Sources */,
 				C80D94CA217F1F410004AEE1 /* LinesSelectCell.m in Sources */,
