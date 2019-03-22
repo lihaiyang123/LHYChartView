@@ -1,2 +1,2 @@
 # LHYChartView
-https://img.shields.io/badge/anything-youlike-brightgreen.svg
+[![npm version](https://badge.fury.io/js/react-native.svg)](https://badge.fury.io/js/react-native)
