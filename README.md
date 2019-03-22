@@ -1,2 +1,2 @@
 # LHYChartView
-GET / repos /：user /：repo / downloads
+https://img.shields.io/badge/anything-youlike-brightgreen.svg
