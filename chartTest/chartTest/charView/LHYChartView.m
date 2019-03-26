@@ -100,32 +100,19 @@
 
 @interface LHYChartView ()<UIScrollViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,CAAnimationDelegate>
 {
-    CGFloat currentPage;//当前页数
-    //CGFloat Xmargin;//X轴方向的偏移
-    CGFloat Ymargin;//Y轴方向的偏移
     CGPoint lastPoint;//最后一个坐标点
-    UIButton *firstBtn;
-    UIButton *lastBtn;
     CGFloat titleWOfY;
 }
 
-@property (nonatomic,strong)YJYTouchScroll *chartScrollView;
-@property (nonatomic,strong)YJYTouchCollectionView * xAxiCollectionView;
+@property (nonatomic,strong)YJYTouchScroll *chartScrollView;//折线图滑动的scrollview
+@property (nonatomic,strong)YJYTouchCollectionView * xAxiCollectionView;//底部日期滑动的collectionview
 @property (nonatomic,strong)UIPageControl *pageControl;//分页
 @property (nonatomic,strong)NSMutableArray *leftPointArr;//左边的数据源
 @property (nonatomic,strong)NSMutableArray *rightPointArr;//左边的数据源
 @property (nonatomic,strong)NSMutableArray *leftBtnArr;//左边按钮
-@property (nonatomic, strong)NSMutableArray *detailLabelArr;
-@property (nonatomic,strong)NSArray *leftScaleArr;
-@property (nonatomic,strong)NSArray *rightScaleArr;
 @property (nonatomic,strong)NSMutableArray *leftScaleViewArr;//左边的点击显示图
-@property (nonatomic,strong)UIView *scaleBgView;
-@property (nonatomic,strong)UILabel *lineLabel;
-@property (nonatomic,strong)UILabel *scaleLabel;
-@property (nonatomic,strong)UILabel *dateTimeLabel;
-@property (nonatomic,assign)CGFloat leftJiange;
-@property (nonatomic,assign)CGFloat jiange;
-@property (nonatomic,assign)CGFloat rightJiange;
+@property (nonatomic,assign)CGFloat leftJiange;//左侧坐标系的间距
+@property (nonatomic,assign)CGFloat rightJiange;//右侧坐标系的间距
 @property (nonatomic,assign)BOOL showSelect;
 @property (nonatomic,assign) NSInteger selectIndex;
 @property (nonatomic,strong)UIView *selectView;
@@ -173,14 +160,11 @@
 }
 
 -(void)initNew{
-    currentPage = 0;
     _precisionScale = 1;
     _indexPathIndex = -1;
     self.leftPointArr = [NSMutableArray array];
     self.rightPointArr = [NSMutableArray array];
     self.leftBtnArr = [NSMutableArray array];
-    self.detailLabelArr = [NSMutableArray array];
-    self.leftScaleArr = [NSArray array];
     self.leftScaleViewArr = [NSMutableArray array];
     self.markArray = [NSMutableArray array];
     self.borderLineColor = [UIColor colorWithRed:224/255.0f green:224/255.0f blue:224/255.0f alpha:1];
@@ -202,7 +186,6 @@
     self.isSelect = YES;
     self.leftJiange = 1;
     self.rightJiange = 1;
-    self.jiange = 1;
     self.xRow = 7;
     self.isShowYtext = YES;
     self.isShowFirstPaoPao = NO;
@@ -214,30 +197,6 @@
     titleWOfY = 0;
     _Xmargin = 50;
     _row = 5;
-}
-
--(UILabel *)scaleLabel{
-    if (!_scaleLabel) {
-        _scaleLabel = [[UILabel alloc]init];
-        _scaleLabel.textAlignment = 1;
-        _scaleLabel.text = @"3.3681%";
-        _scaleLabel.font = [UIFont systemFontOfSize:11];
-        _scaleLabel.backgroundColor = [UIColor colorWithRed:255/255.0 green:159/255.0 blue:106/255.0 alpha:1];
-        _scaleLabel.textColor = [UIColor whiteColor];
-    }
-    return _scaleLabel;
-}
-
--(UILabel *)dateTimeLabel{
-    if (!_dateTimeLabel) {
-        _dateTimeLabel = [[UILabel alloc]init];
-        _dateTimeLabel.textAlignment = 1;
-        _dateTimeLabel.text = @"2016.04.16";
-        _dateTimeLabel.font = [UIFont systemFontOfSize:11];
-        _dateTimeLabel.backgroundColor = [UIColor whiteColor];
-        _dateTimeLabel.textColor = [UIColor colorWithRed:181/255.0 green:181/255.0 blue:181/255.0 alpha:1];
-    }
-    return _dateTimeLabel;
 }
 
 -(NSMutableArray *)charCircleViewArr{
@@ -290,14 +249,6 @@
         [self.chartScrollView addSubview:_paopaoView];
     }
     return _paopaoView;
-}
-
--(UILabel *)lineLabel{
-    if (!_lineLabel) {
-        _lineLabel = [[UILabel alloc]init];
-        _lineLabel.backgroundColor = [UIColor colorWithRed:255/255.0 green:159/255.0 blue:106/255.0 alpha:1];
-    }
-    return _lineLabel;
 }
 
 #pragma -mark -------------scrollViewDelegate----------------
@@ -573,16 +524,12 @@
     if (_leftDataArr.count > 0) {
         if (!self.reLoading) {
             if (_unitStyle == LHYUnitThousand) {
-                _jiange = 1000;
                 _leftJiange = 1000;
             }else if (_unitStyle == LHYUnitWan){
-                _jiange = 10000;
                 _leftJiange = 10000;
             }else if (_unitStyle == LHYUnitMillion){
-                _jiange = 100000000;
                 _leftJiange = 100000000;
             }else{
-                _jiange = 1;
                 _leftJiange = 1;
             }
         }
@@ -591,17 +538,11 @@
             if (jiange > _leftJiange) {
                 _leftJiange = jiange;
             }
-            if (jiange > _jiange) {
-                _jiange = jiange;
-            }
         }else{
             for (int i = 0; i < _leftDataArr.count; i++) {
                 CGFloat jiange = [self spaceValue:_leftDataArr[i]];
                 if (jiange > _leftJiange) {
                     _leftJiange = jiange;
-                }
-                if (jiange > _jiange) {
-                    _jiange = jiange;
                 }
             }
         }
@@ -631,9 +572,6 @@
             CGFloat jiange = [self spaceValue:@[[NSString stringWithFormat:@"%f",self.max]]];
             if (jiange > _leftJiange) {
                 _leftJiange = jiange;
-            }
-            if (jiange > _jiange) {
-                _jiange = jiange;
             }
         }else{
             for (int i = 0; i < _rightDataArr.count; i++) {
@@ -973,10 +911,10 @@
     CGFloat labelWidth = 0;
     switch (_chartViewStyle) {
         case 0:
-            textWidth = [NSString measureSinglelineStringWidth:[self unitValue:_jiange * (_row - 1)] andFont:_y_Font];
+            textWidth = [NSString measureSinglelineStringWidth:[self unitValue:_leftJiange * (_row - 1)] andFont:_y_Font];
             break;
         case 1:
-            textWidth = [NSString measureSinglelineStringWidth:[self unitValue:_jiange * (_row - 1)] andFont:_y_Font];
+            textWidth = [NSString measureSinglelineStringWidth:[self unitValue:_leftJiange * (_row - 1)] andFont:_y_Font];
             break;
         case 2:
             textWidth = [NSString measureSinglelineStringWidth:[self unitValue:_leftJiange * (_row - 1)] andFont:_y_Font];
@@ -1008,10 +946,10 @@
         }else{
             switch (_chartViewStyle) {
                 case 0:
-                    leftLabel.text = [self unitValue:_jiange * i];
+                    leftLabel.text = [self unitValue:_leftJiange * i];
                     break;
                 case 1:
-                    leftLabel.text = [self unitValue:_jiange * i];
+                    leftLabel.text = [self unitValue:_leftJiange * i];
                     break;
                 case 2:
                     leftLabel.text = [self unitValue:_leftJiange * i];
@@ -1064,10 +1002,10 @@
         NSString * str = @"";
         switch (_chartViewStyle) {
             case 0:
-                str = [self unitValue:_jiange * i];
+                str = [self unitValue:_leftJiange * i];
                 break;
             case 1:
-                str = [self unitValue:_jiange * i];
+                str = [self unitValue:_leftJiange * i];
                 break;
             case 2:
                 str = [self unitValue:_leftJiange * i];
@@ -1135,17 +1073,6 @@
             btn.selected = YES;
         }else{
             btn.selected = NO;
-        }
-    }
-    [self showDetailLabel:sender];
-}
-
--(void)showDetailLabel:(UIButton *)sender{
-    for (UILabel * label in _detailLabelArr) {
-        if (sender.tag+200 == label.tag) {
-            label.hidden = NO;
-        }else{
-            label.hidden = YES;
         }
     }
 }
@@ -1441,7 +1368,6 @@
 
 -(void)addLines1With:(UIView *)view{
     CGFloat magrginHeight = (view.bounds.size.height)/ _row;
-    Ymargin = magrginHeight;
     CAShapeLayer * dashLayer = [CAShapeLayer layer];
     _dashLayer = dashLayer;
     dashLayer.strokeColor = self.borderLineColor.CGColor;
