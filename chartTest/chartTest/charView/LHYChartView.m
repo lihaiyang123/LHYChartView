@@ -135,6 +135,8 @@
 @property (nonatomic,strong) NSValue * lastValue;
 //选中的泡泡Tag
 @property (nonatomic,assign) NSInteger selectTag;
+
+@property (nonatomic,assign) CGFloat minValue;
 @end
 
 @implementation LHYChartView
@@ -174,6 +176,7 @@
     self.chartViewStyle = 0;
     self.chartLayerStyle = 0;
     self.lineLayerStyle = 0;
+    self.minValue = 0;
     self.proportion = 0.5;
     self.colors = [NSArray array];
     self.lineWidth = 1;
@@ -327,6 +330,13 @@
         }
     }
     NSInteger max = [self getNumber:maxValue];
+    if (!self.min && !self.min.length) {
+        NSInteger min = [self getMinNumber:minValue];
+        self.minValue = min < self.minValue ? min : self.minValue;
+    }else{
+        self.minValue = [self.min floatValue];
+    }
+    max = max - self.minValue;
     if (_unitStyle == LHYUnitMillion) {
         NSInteger maxValueInterger = max / 100000000.f + 0.99;
         NSInteger xMaxValue = maxValueInterger % (_row - 1);
@@ -400,6 +410,13 @@
 // 只取小数点之前的数字
 - (CGFloat)getNumber:(CGFloat)value{
     CGFloat upValue = ceil(value);
+    NSString *string = [NSString stringWithFormat:@"%.0f",upValue];
+    return [string integerValue];
+}
+
+// 只取小数点之前的数字
+- (CGFloat)getMinNumber:(CGFloat)value{
+    CGFloat upValue = floor(value);
     NSString *string = [NSString stringWithFormat:@"%.0f",upValue];
     return [string integerValue];
 }
@@ -533,8 +550,13 @@
                 _leftJiange = 1;
             }
         }
+        if (!self.min || !self.min.length) {
+            self.minValue = 0;
+        }else{
+            self.minValue = [self.min floatValue];
+        }
         if (self.max) {
-            CGFloat jiange = [self spaceValue:@[[NSString stringWithFormat:@"%f",self.max]]];
+            CGFloat jiange = [self spaceValue:@[[NSString stringWithFormat:@"%f",self.max]] ];
             if (jiange > _leftJiange) {
                 _leftJiange = jiange;
             }
@@ -888,13 +910,14 @@
 }
 #pragma mark ----------获取所有坐标点-------------
 -(NSMutableArray *)addDataPointWith:(UIView *)view andArr:(NSArray *)DataArr andInterval:(CGFloat)interval{
+    CGFloat min =  self.minValue <= 0 ? self.minValue + fabs(self.minValue) * 2 : [[NSString stringWithFormat:@"-%f",self.minValue] floatValue];
     CGFloat height = self.chartScrollView.bounds.size.height - 13 - KCircleRadius1 / 2 - 4;
     //初始点
     NSMutableArray *arr = [NSMutableArray arrayWithArray:DataArr];
     NSMutableArray * marr = [NSMutableArray array];
     CGFloat xMargin = CGRectGetWidth(self.chartScrollView.frame) / (_xRow - 1);
     for (int i = 0; i<arr.count; i++) {
-        float tempHeight = [arr[i] floatValue] / (interval * (_row - 1)) ;
+        float tempHeight = ([arr[i] floatValue] + min) / (interval * (_row - 1)) ;
         NSValue *point = [NSValue valueWithCGPoint:CGPointMake(xMargin * i + xMargin, (height *(1 - tempHeight) + 13))];
         if (i == 0) {
             //            NSValue *point1 = [NSValue valueWithCGPoint:CGPointMake(0 , (height + 13))];
@@ -909,19 +932,8 @@
 -(void)addLeftViews{
     CGFloat textWidth = 0;
     CGFloat labelWidth = 0;
-    switch (_chartViewStyle) {
-        case 0:
-            textWidth = [NSString measureSinglelineStringWidth:[self unitValue:_leftJiange * (_row - 1)] andFont:_y_Font];
-            break;
-        case 1:
-            textWidth = [NSString measureSinglelineStringWidth:[self unitValue:_leftJiange * (_row - 1)] andFont:_y_Font];
-            break;
-        case 2:
-            textWidth = [NSString measureSinglelineStringWidth:[self unitValue:_leftJiange * (_row - 1)] andFont:_y_Font];
-            break;
-        default:
-            break;
-    }
+    textWidth = [NSString measureSinglelineStringWidth:[self unitValue:_leftJiange * (_row - 1) + self.minValue] andFont:_y_Font];
+    textWidth = [NSString measureSinglelineStringWidth:[self unitValue:_leftJiange * 0 + self.minValue] andFont:_y_Font] > textWidth ? [NSString measureSinglelineStringWidth:[self unitValue:_leftJiange * 0 + self.minValue] andFont:_y_Font] : textWidth;
     if (_unitStyle == LHYUnitMoneyPercentage) {
         textWidth = [NSString measureSinglelineStringWidth:@"100%" andFont:_y_Font];
     }
@@ -944,21 +956,9 @@
         if (_unitStyle == LHYUnitMoneyPercentage) {
             leftLabel.text = [NSString stringWithFormat:@"%.0f%%",100.0 / (_row - 1) * i];
         }else{
-            switch (_chartViewStyle) {
-                case 0:
-                    leftLabel.text = [self unitValue:_leftJiange * i];
-                    break;
-                case 1:
-                    leftLabel.text = [self unitValue:_leftJiange * i];
-                    break;
-                case 2:
-                    leftLabel.text = [self unitValue:_leftJiange * i];
-                    break;
-                default:
-                    break;
-            }
+            leftLabel.text = [self unitValue:_leftJiange * i + self.minValue];
         }
-        if (i > 0 && self.isShowYtext) [self addSubview:leftLabel];
+        if (i >= !self.isShowZero && self.isShowYtext) [self addSubview:leftLabel];
         if (self.isGrid){
             CGFloat xMargin = chartScrollViewwidth / (_xRow - 1);
             CGFloat width = 0;
@@ -1032,13 +1032,13 @@
     }else if (_unitStyle == 3){
         returnValue = value / 100000000;
     }else if (_unitStyle == 4){
-        if (value >= 100000000) {
+        if (value >= 100000000 || returnValue <= 100000000) {
             return [NSString stringWithFormat:@"%.1f亿%@",value / 100000000,self.unitName];
         }else{
             return [NSString stringWithFormat:@"%.1f万%@",value / 10000,self.unitName];
         }
     }
-    if (returnValue >= 1000) {
+    if (returnValue >= 1000 || returnValue <= 1000) {
         return [NSString stringWithFormat:@"%.1fk%@",returnValue / 1000,self.unitName];
     }
     return [NSString stringWithFormat:@"%.0f%@",returnValue,self.unitName];

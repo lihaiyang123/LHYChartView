@@ -129,6 +129,10 @@ typedef NS_ENUM(NSInteger,LHYUnitStyle){
 @property (nonatomic,assign) BOOL hiddenZreo;
 //最大值
 @property (nonatomic,assign) CGFloat max;
+//最小值 不传的话，默认从数据中获取最小值，如果数据中最小值大于0，则为0。  传的话，以传入的最小值为准。
+@property (nonatomic,strong) NSString *min;
+//是否显示Y轴的零位   YES显示  NO不显示
+@property (nonatomic,assign) BOOL isShowZero;
 /**
  Y轴单位
  */
