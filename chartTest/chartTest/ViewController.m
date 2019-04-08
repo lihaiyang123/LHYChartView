@@ -132,6 +132,8 @@
     incomeChartLineView.proportion = 0.5;
     //折线图是否从零点开始画
     incomeChartLineView.hiddenZreo = YES;
+    //折线为0的时候，不偏移
+    incomeChartLineView.showChartOffset = NO;
     //设置颜色
     incomeChartLineView.leftColorStrArr = @[@"#6dd89c",@"#00a1eb",@"#bc69e0",@"#385af0"];
     //折线图数据

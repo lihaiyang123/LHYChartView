@@ -194,6 +194,7 @@
     self.isShowFirstPaoPao = NO;
     self.unitName = @"";
     self.selectTag = -1;
+    self.showChartOffset = YES;
     self.middleLineColor = [UIColor colorWithHexString:@"e0e0e0"];
     UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(viewClick:)];
     [self addGestureRecognizer:tap];
@@ -910,8 +911,12 @@
 }
 #pragma mark ----------获取所有坐标点-------------
 -(NSMutableArray *)addDataPointWith:(UIView *)view andArr:(NSArray *)DataArr andInterval:(CGFloat)interval{
+    CGFloat offset = 0;
+    if (self.showChartOffset) {
+        offset = 4;
+    }
     CGFloat min =  self.minValue <= 0 ? self.minValue + fabs(self.minValue) * 2 : [[NSString stringWithFormat:@"-%f",self.minValue] floatValue];
-    CGFloat height = self.chartScrollView.bounds.size.height - 13 - KCircleRadius1 / 2 - 4;
+    CGFloat height = self.chartScrollView.bounds.size.height - 13 - KCircleRadius1 / 2 - offset;
     //初始点
     NSMutableArray *arr = [NSMutableArray arrayWithArray:DataArr];
     NSMutableArray * marr = [NSMutableArray array];
@@ -920,7 +925,7 @@
         float tempHeight = ([arr[i] floatValue] + min) / (interval * (_row - 1)) ;
         NSValue *point = [NSValue valueWithCGPoint:CGPointMake(xMargin * i + xMargin, (height *(1 - tempHeight) + 13))];
         if (i == 0) {
-            //            NSValue *point1 = [NSValue valueWithCGPoint:CGPointMake(0 , (height + 13))];
+//            NSValue *point1 = [NSValue valueWithCGPoint:CGPointMake(0 , (height + 13))];
             NSValue *point1 = [NSValue valueWithCGPoint:CGPointMake(0 , (height *(1 - tempHeight) + 13))];
             [marr addObject:point1];
         }
@@ -1038,7 +1043,7 @@
             return [NSString stringWithFormat:@"%.1f万%@",value / 10000,self.unitName];
         }
     }
-    if (returnValue >= 1000 || returnValue <= 1000) {
+    if ((returnValue >= 1000 || returnValue <= 1000) && (self.leftJiange * (self.row - 1) >= 1000)) {
         return [NSString stringWithFormat:@"%.1fk%@",returnValue / 1000,self.unitName];
     }
     return [NSString stringWithFormat:@"%.0f%@",returnValue,self.unitName];
@@ -1367,7 +1372,6 @@
 }
 
 -(void)addLines1With:(UIView *)view{
-    CGFloat magrginHeight = (view.bounds.size.height)/ _row;
     CAShapeLayer * dashLayer = [CAShapeLayer layer];
     _dashLayer = dashLayer;
     dashLayer.strokeColor = self.borderLineColor.CGColor;

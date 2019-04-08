@@ -137,6 +137,11 @@ typedef NS_ENUM(NSInteger,LHYUnitStyle){
  Y轴单位
  */
 @property (nonatomic,strong) NSString * unitName;
+
+/**
+ 折线为0的时候，是否向上偏移，默认偏移。不偏移传NO
+ */
+@property (nonatomic,assign) BOOL showChartOffset;
 -(void)show;
 //初始化
 -(void)initNew;
