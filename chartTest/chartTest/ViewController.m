@@ -41,8 +41,6 @@
     incomeChartLineView.y_Font = [UIFont systemFontOfSize:10];
     //设置Y轴坐标字体颜色
     incomeChartLineView.y_Color = [UIColor colorWithHexString:@"#999999"];
-    //设置X轴数据间隔
-    incomeChartLineView.Xmargin = 55;
     //设置背景颜色
     incomeChartLineView.backgroundColor = [UIColor whiteColor];
     //边框标线颜色
@@ -105,8 +103,6 @@
     incomeChartLineView.y_Font = [UIFont systemFontOfSize:10];
     //设置Y轴坐标字体颜色
     incomeChartLineView.y_Color = [UIColor colorWithHexString:@"#999999"];
-    //设置X轴数据间隔
-    incomeChartLineView.Xmargin = 55;
     //设置背景颜色
     incomeChartLineView.backgroundColor = [UIColor whiteColor];
     //边框标线颜色

@@ -200,7 +200,6 @@
     UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(viewClick:)];
     [self addGestureRecognizer:tap];
     titleWOfY = 0;
-    _Xmargin = 50;
     _row = 5;
 }
 
@@ -1279,7 +1278,7 @@
     self.paopaoView.margin = xMargin;
     if (paopao_x == 0 && size.width > xMargin) {
         self.paopaoView.beyondLeft = YES;
-    }else if ((index + 1) * xMargin + size.width * 0.5 > self.chartScrollView.contentSize.width && size.width > _Xmargin && (index + 1) * xMargin + size.width * 0.5 > self.chartScrollView.frame.size.width){
+    }else if ((index + 1) * xMargin + size.width * 0.5 > self.chartScrollView.contentSize.width && size.width > xMargin && (index + 1) * xMargin + size.width * 0.5 > self.chartScrollView.frame.size.width){
         self.paopaoView.beyondRight = YES;
     }
     NSArray * colorArray = _paopaoDataColors ? _paopaoDataColors : colorArr;

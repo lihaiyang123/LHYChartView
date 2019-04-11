@@ -79,8 +79,6 @@ typedef NS_ENUM(NSInteger,LHYUnitStyle){
 @property (nonatomic, strong) UIFont *y_Font;
 //Y轴坐标字体颜色
 @property (nonatomic, strong) UIColor *y_Color;
-//X轴间隔大小
-@property (nonatomic, assign) CGFloat Xmargin;
 //折现样式  默认没有
 @property (nonatomic, assign) LHYLineLayerStyle lineLayerStyle;
 //折现渐变颜色组
