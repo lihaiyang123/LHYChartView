@@ -195,6 +195,7 @@
     self.unitName = @"";
     self.selectTag = -1;
     self.showChartOffset = YES;
+    self.isShowBezier = YES;
     self.middleLineColor = [UIColor colorWithHexString:@"e0e0e0"];
     UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(viewClick:)];
     [self addGestureRecognizer:tap];
@@ -523,16 +524,6 @@
         }
         [colorArray addObject:color];
     }
-    //    for (id obj in _colors) {
-    //        UIColor * color;
-    //        if ([obj isKindOfClass:[UIColor class]]) {
-    //            color = obj;
-    //        }else{
-    //            NSString * colorStr = obj;
-    //            color = [UIColor colorWithHexString:colorStr];
-    //        }
-    //        [colorArray addObject:color];
-    //    }
     _rightColorStrArr = [NSArray arrayWithArray:colorArray];
 }
 //显示左右两种标线
@@ -587,7 +578,7 @@
             if (i < _colors.count) {
                 colorArray = _colors[i];
             }
-            [self addBezierPoint:pointMarray[i] andColor:_leftColorStrArr[i<_leftColorStrArr.count?i:_leftColorStrArr.count-1] andColors:colorArray];
+            self.isShowBezier ? [self addBezierPoint:pointMarray[i] andColor:_leftColorStrArr[i<_leftColorStrArr.count?i:_leftColorStrArr.count-1] andColors:colorArray] : [self addLinePoint:pointMarray[i] andColor:_leftColorStrArr[i<_leftColorStrArr.count?i:_leftColorStrArr.count-1] andColors:colorArray];
         }
     }
     if (_rightDataArr.count > 0) {
@@ -629,7 +620,7 @@
             if (i < _colors.count) {
                 colorArray = _colors[i];
             }
-            [self addBezierPoint:pointMarray[i] andColor:_rightColorStrArr[i<_rightColorStrArr.count?i:_rightColorStrArr.count-1] andColors:colorArray];
+            self.isShowBezier ? [self addBezierPoint:pointMarray[i] andColor:_rightColorStrArr[i<_rightColorStrArr.count?i:_rightColorStrArr.count-1] andColors:colorArray] : [self addLinePoint:pointMarray[i] andColor:_rightColorStrArr[i<_rightColorStrArr.count?i:_rightColorStrArr.count-1] andColors:colorArray];;
         }
         ////添加连线
         [self addRightViews];
@@ -794,8 +785,8 @@
             if (i > 0) {
                 CGPoint prePoint = [[pointArray objectAtIndex:i-1] CGPointValue];
                 CGPoint nowPoint = [[pointArray objectAtIndex:i] CGPointValue];
-                //            [beizer addLineToPoint:point];
                 [lineBeizer addCurveToPoint:nowPoint controlPoint1:CGPointMake((nowPoint.x+prePoint.x)/2, prePoint.y) controlPoint2:CGPointMake((nowPoint.x+prePoint.x)/2, nowPoint.y)];
+                [lineBeizer addLineToPoint:nowPoint];
                 if (_chartLayerStyle == LHYChartGradient) [shelterBezier addCurveToPoint:nowPoint controlPoint1:CGPointMake((nowPoint.x+prePoint.x)/2, prePoint.y) controlPoint2:CGPointMake((nowPoint.x+prePoint.x)/2, nowPoint.y)];
                 if (i == pointArray.count-1) {
                     [lineBeizer moveToPoint:nowPoint];//添加连线
@@ -807,7 +798,6 @@
                 if (i > 1) {
                     CGPoint prePoint = [[pointArray objectAtIndex:i-1] CGPointValue];
                     CGPoint nowPoint = [[pointArray objectAtIndex:i] CGPointValue];
-                    //            [beizer addLineToPoint:point];
                     [lineBeizer addCurveToPoint:nowPoint controlPoint1:CGPointMake((nowPoint.x+prePoint.x)/2, prePoint.y) controlPoint2:CGPointMake((nowPoint.x+prePoint.x)/2, nowPoint.y)];
                     if (_chartLayerStyle == LHYChartGradient) [shelterBezier addCurveToPoint:nowPoint controlPoint1:CGPointMake((nowPoint.x+prePoint.x)/2, prePoint.y) controlPoint2:CGPointMake((nowPoint.x+prePoint.x)/2, nowPoint.y)];
                     if (i == pointArray.count-1) {
@@ -830,7 +820,69 @@
             }
         }
     }
-    
+    [self drawLine:lineBeizer shelterBezier:shelterBezier startP:startP colors:colors color:color];
+}
+
+-(void)addLinePoint:(NSArray *)pointArray andColor:(UIColor *)color andColors:(NSArray *)colors{
+    if (pointArray.count <= 0) {
+        return;
+    }
+    //取得起始点
+    CGPoint startP = CGPointMake(0, 0);
+    if (!self.hiddenZreo) {
+        startP = [[pointArray objectAtIndex:0] CGPointValue];
+    }else{
+        startP = [[pointArray objectAtIndex:1] CGPointValue];
+    }
+    //直线的连线
+    UIBezierPath *lineBeizer = [UIBezierPath bezierPath];
+    [lineBeizer moveToPoint:startP];
+    _circlePath = lineBeizer;
+    //遮罩层的形状
+    UIBezierPath *shelterBezier = [UIBezierPath bezierPath];
+    shelterBezier.lineCapStyle = kCGLineCapRound;
+    shelterBezier.lineJoinStyle = kCGLineJoinMiter;
+    [shelterBezier moveToPoint:startP];
+    for (int i = 0;i<pointArray.count;i++ ) {
+        if (!self.hiddenZreo) {
+            if (i > 0) {
+                CGPoint nowPoint = [[pointArray objectAtIndex:i] CGPointValue];
+                [lineBeizer addLineToPoint:nowPoint];
+                if (_chartLayerStyle == LHYChartGradient) [shelterBezier addLineToPoint:nowPoint];
+                if (i == pointArray.count-1) {
+                    [lineBeizer moveToPoint:nowPoint];//添加连线
+                    lastPoint = nowPoint;
+                }
+            }
+        }else{
+            if (pointArray.count > 2) {
+                if (i > 1) {
+                    CGPoint nowPoint = [[pointArray objectAtIndex:i] CGPointValue];
+                    [lineBeizer addLineToPoint:nowPoint];
+                    if (_chartLayerStyle == LHYChartGradient) [shelterBezier addLineToPoint:nowPoint];
+                    if (i == pointArray.count-1) {
+                        [lineBeizer moveToPoint:nowPoint];//添加连线
+                        lastPoint = nowPoint;
+                    }
+                }
+            }else{
+                if (i > 0) {
+                    CGPoint nowPoint = [[pointArray objectAtIndex:i] CGPointValue];
+                    nowPoint.x +=1;
+                    [lineBeizer addLineToPoint:nowPoint];
+                    if (_chartLayerStyle == LHYChartGradient) [shelterBezier addLineToPoint:nowPoint];
+                    if (i == pointArray.count-1) {
+                        [lineBeizer moveToPoint:nowPoint];//添加连线
+                        lastPoint = nowPoint;
+                    }
+                }
+            }
+        }
+    }
+    [self drawLine:lineBeizer shelterBezier:shelterBezier startP:startP colors:colors color:color];
+}
+
+-(void)drawLine:(UIBezierPath *)lineBeizer shelterBezier:(UIBezierPath *)shelterBezier startP:(CGPoint)startP colors:(NSArray *)colors color:(UIColor *)color{
     CGFloat bgViewHeight = self.chartScrollView.bounds.size.height;
     //获取最后一个点的X值
     CGFloat lastPointX = lastPoint.x;
@@ -907,8 +959,9 @@
     boundsAnmi.autoreverses = NO;
     boundsAnmi.removedOnCompletion = NO;
     [gradientLayer addAnimation:boundsAnmi forKey:@"bounds"];
-    
 }
+
+
 #pragma mark ----------获取所有坐标点-------------
 -(NSMutableArray *)addDataPointWith:(UIView *)view andArr:(NSArray *)DataArr andInterval:(CGFloat)interval{
     CGFloat offset = 0;

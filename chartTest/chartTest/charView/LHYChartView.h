@@ -142,6 +142,12 @@ typedef NS_ENUM(NSInteger,LHYUnitStyle){
  折线为0的时候，是否向上偏移，默认偏移。不偏移传NO
  */
 @property (nonatomic,assign) BOOL showChartOffset;
+
+/**
+ 折线是否显示为贝塞尔曲线，yes为贝塞尔曲线，no为直线。默认为yes
+ */
+@property (nonatomic,assign) BOOL isShowBezier;
+
 -(void)show;
 //初始化
 -(void)initNew;
