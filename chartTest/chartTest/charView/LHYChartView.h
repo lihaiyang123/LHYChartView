@@ -146,6 +146,11 @@ typedef NS_ENUM(NSInteger,LHYUnitStyle){
  */
 @property (nonatomic,assign) BOOL isShowBezier;
 
+/**
+ 泡泡是否跟随手势移动  YES为是  NO为不跟随  默认为NO
+ */
+@property (nonatomic,assign) BOOL paopaoFollowSliding;
+
 -(void)show;
 //初始化
 -(void)initNew;

@@ -137,6 +137,8 @@
 @property (nonatomic,assign) NSInteger selectTag;
 
 @property (nonatomic,assign) CGFloat minValue;
+
+@property (nonatomic,assign) NSInteger leftIndex;
 @end
 
 @implementation LHYChartView
@@ -196,6 +198,7 @@
     self.selectTag = -1;
     self.showChartOffset = YES;
     self.isShowBezier = YES;
+    self.paopaoFollowSliding = NO;
     self.middleLineColor = [UIColor colorWithHexString:@"e0e0e0"];
     UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(viewClick:)];
     [self addGestureRecognizer:tap];
@@ -255,20 +258,6 @@
     return _paopaoView;
 }
 
-#pragma -mark -------------scrollViewDelegate----------------
--(void)scrollViewDidScroll:(UIScrollView *)scrollView{
-    self.contentOffset = scrollView.contentOffset;
-    if (scrollView == _chartScrollView) {
-        _xAxiCollectionView.contentOffset = scrollView.contentOffset;
-    }else{
-        _chartScrollView.contentOffset = scrollView.contentOffset;
-    }
-    for (UIView * markCrossView in self.markArray) {
-        CGRect frame = markCrossView.frame;
-        frame.origin.x = scrollView.contentOffset.x;
-        [markCrossView setFrame:frame];
-    }
-}
 #pragma -mark --------------collViewDelegate----------------
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
     if (self.dataArrOfX.count > 0) {
@@ -494,6 +483,22 @@
                     [self drawOtherLin:self.selectTag AndPoint:point];
                 }
             }
+        }
+    }
+    if (self.paopaoFollowSliding) {
+        if (CGRectGetWidth(self.chartScrollView.frame) >= self.chartScrollView.contentSize.width) {
+            self.chartScrollView.scrollEnabled = NO;
+            UIPanGestureRecognizer * pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(viewClick:)];
+            [self addGestureRecognizer:pan];
+        }else{
+            for (int i = 0; i < self.gestureRecognizers.count; i++) {
+                id obj = self.gestureRecognizers[i];
+                if ([obj isKindOfClass:[UIPanGestureRecognizer class]]) {
+                    UIPanGestureRecognizer * pan = obj;
+                    [pan removeTarget:self action:@selector(viewClick:)];
+                }
+            }
+            self.chartScrollView.scrollEnabled = YES;
         }
     }
 }
@@ -1133,8 +1138,31 @@
         }
     }
 }
-
-#define mark - 点击屏幕事件
+#pragma mark - ------------scrollViewDelegate----------------
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    self.contentOffset = scrollView.contentOffset;
+    if (scrollView == _chartScrollView) {
+        _xAxiCollectionView.contentOffset = scrollView.contentOffset;
+    }else{
+        _chartScrollView.contentOffset = scrollView.contentOffset;
+    }
+    for (UIView * markCrossView in self.markArray) {
+        CGRect frame = markCrossView.frame;
+        frame.origin.x = scrollView.contentOffset.x;
+        [markCrossView setFrame:frame];
+    }
+    if (!self.paopaoView.hidden && self.paopaoFollowSliding) {
+        CGFloat xMargin = CGRectGetWidth(self.chartScrollView.frame) / (_xRow - 1);
+        NSInteger leftIndex = ((self.selectIndex + 1) * xMargin - self.chartScrollView.contentOffset.x
+                               + xMargin / 2) / xMargin;
+        if (leftIndex > self.leftIndex) {
+            [self drawOtherLin:self.selectIndex - 1 AndPoint:CGPointZero];
+        }else if (leftIndex < self.leftIndex){
+            [self drawOtherLin:self.selectIndex + 1 AndPoint:CGPointZero];
+        }
+    }
+}
+#pragma mark - 点击屏幕事件
 //- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
 //}
 //
@@ -1145,7 +1173,8 @@
     if (!_isSelect) return;
     [self colorConversion];
     CGPoint point;
-    if ([sender isKindOfClass:[UITapGestureRecognizer class]]) {
+    CGFloat xMargin = CGRectGetWidth(self.chartScrollView.frame) / (_xRow - 1);
+    if ([sender isKindOfClass:[UITapGestureRecognizer class]] || [sender isKindOfClass:[UIPanGestureRecognizer class]]) {
         point = [sender locationInView:self];
         self.lastValue = [NSValue valueWithCGPoint:point];
         point.x -= titleWOfY;
@@ -1155,7 +1184,6 @@
         self.lastValue = [NSValue valueWithCGPoint:point];
         point.x -= titleWOfY;
     }
-    CGFloat xMargin = CGRectGetWidth(self.chartScrollView.frame) / (_xRow - 1);
     if (point.x > xMargin / 2 && point.x < CGRectGetMaxX(self.chartScrollView.frame) && point.y > CGRectGetMinY(self.chartScrollView.frame) && point.y < CGRectGetMaxY(self.chartScrollView.frame)) {
         point.x = point.x + self.chartScrollView.contentOffset.x;
         point.y = point.y + self.chartScrollView.contentOffset.y;
@@ -1165,6 +1193,9 @@
             index = index + 1;
         }
         self.selectTag = index;
+        if ([sender isKindOfClass:[UIPanGestureRecognizer class]] && self.selectIndex == index){
+            return;
+        }
         [self drawOtherLin:index AndPoint:point];
         return;
     }
@@ -1175,6 +1206,9 @@
         float indexF = point.x - xMargin * (index + 1);
         if (indexF>xMargin / 2) {
             index = index + 1;
+        }
+        if ([sender isKindOfClass:[UIPanGestureRecognizer class]] && self.selectIndex == index){
+            return;
         }
         [self drawOtherLin:index AndPoint:point];
         return;
@@ -1203,6 +1237,9 @@
     self.lastIndex = index + 1;
     self.showSelect = YES;
     self.selectIndex = index;
+    CGFloat xMargin = CGRectGetWidth(self.chartScrollView.frame) / (_xRow - 1);
+    self.leftIndex = ((self.selectIndex + 1) * xMargin - self.chartScrollView.contentOffset.x
+                      + xMargin / 2) / xMargin;
     self.indexPathIndex = index;
     [_xAxiCollectionView reloadData];
     [self setPaopaoUI:index];
@@ -1303,7 +1340,7 @@
                 break;
             }
         }
-        CGPoint showPoint = [pointArray[index] CGPointValue];
+        CGPoint showPoint = [pointArray[index >= pointArray.count ? pointArray.count - 1 : index] CGPointValue];
         self.paopaoView.pointX = showPoint.x;
         [self.paopaoView show:dataArr and:self.paopaoTitleArray[index] andTitleColor:titleColor colorArr:colorMarray];
     }else{
