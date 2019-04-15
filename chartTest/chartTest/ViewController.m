@@ -60,6 +60,8 @@
     incomeChartLineView.chartLayerStyle = LHYChartProjection;
     //设置折现效果
     incomeChartLineView.lineLayerStyle = LHYLineLayerNone;
+    
+    incomeChartLineView.lineWidth = 3;
     incomeChartLineView.paopaoBackGroundColor = [UIColor colorWithHexString:@"#111111" andAlpha:0.8];
     //渐变效果的颜色组
     //渐变开始比例
@@ -204,6 +206,7 @@
     incomeChartLineView.leftColorStrArr = @[@"4b7ffe"];
     //显示折线为直线
     incomeChartLineView.isShowBezier = NO;
+    incomeChartLineView.lineWidth = 1;
     incomeChartLineView.hiddenZreo = NO;
     incomeChartLineView.paopaoFollowSliding = YES;
     NSMutableArray *arr = [NSMutableArray array];

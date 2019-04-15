@@ -908,7 +908,7 @@
     shapeLayer.path = lineBeizer.CGPath;
     shapeLayer.fillColor = [UIColor clearColor].CGColor;
     shapeLayer.strokeColor = color.CGColor;
-    shapeLayer.lineWidth = 3;
+    shapeLayer.lineWidth = _lineWidth;
     switch (_chartLayerStyle) {
         case 0:
             break;
