@@ -980,10 +980,9 @@
     CGFloat xMargin = CGRectGetWidth(self.chartScrollView.frame) / (_xRow - 1);
     for (int i = 0; i<arr.count; i++) {
         float tempHeight = ([arr[i] floatValue] + min) / (interval * (_row - 1)) ;
-        NSValue *point = [NSValue valueWithCGPoint:CGPointMake(xMargin * i + xMargin, (height *(1 - tempHeight) + 13))];
+        NSValue *point = [NSValue valueWithCGPoint:CGPointMake(xMargin * i + xMargin, (height *(1 - tempHeight) + 13) + (height - height *(1 - tempHeight) > _lineWidth ? _lineWidth : 0))];
         if (i == 0) {
-//            NSValue *point1 = [NSValue valueWithCGPoint:CGPointMake(0 , (height + 13))];
-            NSValue *point1 = [NSValue valueWithCGPoint:CGPointMake(0 , (height *(1 - tempHeight) + 13))];
+            NSValue *point1 = [NSValue valueWithCGPoint:CGPointMake(0 , (height *(1 - tempHeight) + 13) + (height - height *(1 - tempHeight) > _lineWidth ? _lineWidth : 0))];
             [marr addObject:point1];
         }
         [marr addObject:point];
@@ -1343,6 +1342,7 @@
         CGPoint showPoint = [pointArray[index >= pointArray.count ? pointArray.count - 1 : index] CGPointValue];
         self.paopaoView.pointX = showPoint.x;
         [self.paopaoView show:dataArr and:self.paopaoTitleArray[index] andTitleColor:titleColor colorArr:colorMarray];
+        [self returnBlock:dataArr title:self.paopaoTitleArray[index]];
     }else{
         NSArray * pointArray = self.leftPointArr[0];
         for (NSArray * arr in self.leftPointArr) {
@@ -1354,6 +1354,7 @@
         CGPoint showPoint = [pointArray[index] CGPointValue];
         self.paopaoView.pointX = showPoint.x;
         [self.paopaoView show:dataArr and:@"" andTitleColor:titleColor colorArr:colorMarray];
+        [self returnBlock:dataArr title:self.paopaoTitleArray[index]];
     }
     [self addCircle:index];
 }
@@ -1488,5 +1489,11 @@
     }
     dashLayer.path = path.CGPath;
     [self.layer addSublayer:dashLayer];
+}
+
+-(void)returnBlock:(NSArray *)array title:(NSString *)title{
+    if (self.returnPaoPaoDataBlock) {
+        self.returnPaoPaoDataBlock(array, title);
+    }
 }
 @end

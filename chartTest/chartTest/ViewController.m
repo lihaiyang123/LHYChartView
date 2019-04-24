@@ -80,6 +80,10 @@
     incomeChartLineView.dataArrOfX = @[@"4月",@"5月",@"6月",@"7月",@"8月",@"9月",@"10月",@"11月",@"12月",@"1月",@"2月",@"3月"];
     //泡泡标题
     incomeChartLineView.paopaoTitleArray = @[@"2018-04",@"2018-05",@"2018-06",@"2018-07",@"2018-08",@"2018-09",@"2018-10",@"2018-11",@"2018-12",@"2019-01",@"2019-02",@"2019-03"];
+    //返回泡泡选中值
+    incomeChartLineView.returnPaoPaoDataBlock = ^(NSArray *array, NSString *title) {
+        NSLog(@"%@-----%@",array,title);
+    };
     //泡泡数据
     incomeChartLineView.paopaoDataArray = @[@[@"-10,000元m²",@"30,907元m²",@"32,010元m²",@"33,450元m²",@"30,069元m²",@"31,574元m²",@"30,692元m²",@"33,156元m²",@"29,808元m²",@"31,846元m²",@"29,772元m²",@"29,630元m²"],@[@"46,175元m²",@"44,915元m²",@"36,228元m²",@"50,473元m²",@"28,811元m²",@"11,876元m²",@"23,213元m²",@"26,847元m²",@"27,905元m²",@"9,562元m²",@"34,263元m²",@"25,459元m²"],@[@"20,549元m²",@"15,981元m²",@"23,375元m²",@"20,516元m²",@"19,208元m²",@"15,121元m²",@"13,776元m²",@"16,282元m²",@"30,748元m²",@"26,531元m²",@"31,298元m²",@"33,183元m²"],@[@"11,053元m²",@"25,811元m²"]];
     //开始画图
@@ -206,7 +210,7 @@
     incomeChartLineView.leftColorStrArr = @[@"4b7ffe"];
     //显示折线为直线
     incomeChartLineView.isShowBezier = NO;
-    incomeChartLineView.lineWidth = 1;
+    incomeChartLineView.lineWidth = 3;
     incomeChartLineView.hiddenZreo = NO;
     incomeChartLineView.paopaoFollowSliding = YES;
     NSMutableArray *arr = [NSMutableArray array];

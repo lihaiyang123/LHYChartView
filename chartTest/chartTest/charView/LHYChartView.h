@@ -151,6 +151,12 @@ typedef NS_ENUM(NSInteger,LHYUnitStyle){
  */
 @property (nonatomic,assign) BOOL paopaoFollowSliding;
 
+/**
+ block返回泡泡选中的值
+ */
+@property (nonatomic,copy) void (^returnPaoPaoDataBlock)(NSArray *array,NSString *title);
+
+
 -(void)show;
 //初始化
 -(void)initNew;
