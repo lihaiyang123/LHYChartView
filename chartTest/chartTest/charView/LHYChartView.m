@@ -199,6 +199,7 @@
     self.showChartOffset = YES;
     self.isShowBezier = YES;
     self.paopaoFollowSliding = NO;
+    self.showPaoPaoForIndex = -1;
     self.middleLineColor = [UIColor colorWithHexString:@"e0e0e0"];
     UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(viewClick:)];
     [self addGestureRecognizer:tap];
@@ -470,6 +471,14 @@
                 CGFloat contentSizeWidth = self.chartScrollView.contentSize.width;
                 CGFloat offsetX = contentSizeWidth - CGRectGetWidth(self.chartScrollView.frame);
                 CGPoint contentPoint = CGPointMake(offsetX < 0 ? 0 : offsetX, 0);
+                [self.chartScrollView setContentOffset:contentPoint];
+            }
+            
+            if (self.showPaoPaoForIndex >= 0 && pointArray.count > self.showPaoPaoForIndex) {
+                CGFloat margin = CGRectGetWidth(self.chartScrollView.frame) / (self.xRow - 1);
+                CGFloat contentX = margin * (self.showPaoPaoForIndex + 1);
+                contentX = (contentX - CGRectGetWidth(self.chartScrollView.frame) / 2) > 0 ? (contentX - CGRectGetWidth(self.chartScrollView.frame) / 2) : 0;
+                CGPoint contentPoint = CGPointMake(contentX > self.chartScrollView.contentSize.width ? self.chartScrollView.contentSize.width : contentX, 0);
                 [self.chartScrollView setContentOffset:contentPoint];
             }
         }
@@ -760,6 +769,22 @@
         NSValue * value = [NSValue valueWithCGPoint:point];
         if (!self.paopaoView || !CGRectGetWidth(self.paopaoView.frame) || self.paopaoView.hidden) {
             [self viewClick:value];
+        }
+    }
+    if (self.showPaoPaoForIndex >= 0 && pointArray.count > self.showPaoPaoForIndex) {
+        CGPoint point = [pointArray[self.showPaoPaoForIndex] CGPointValue];
+        point.x -= self.chartScrollView.contentOffset.x;
+        point.x += titleWOfY;
+        NSValue * value = [NSValue valueWithCGPoint:point];
+        if (!self.paopaoView || !CGRectGetWidth(self.paopaoView.frame) || self.paopaoView.hidden) {
+            [self viewClick:value];
+        }
+    }
+    
+    if (self.charCircleViewArr) {
+        for (int i = 0; i < self.charCircleViewArr.count; i++) {
+            UIView * circleView = self.charCircleViewArr[i];
+            [self.chartScrollView bringSubviewToFront:circleView];
         }
     }
 }
@@ -1150,7 +1175,7 @@
         frame.origin.x = scrollView.contentOffset.x;
         [markCrossView setFrame:frame];
     }
-    if (!self.paopaoView.hidden && self.paopaoFollowSliding) {
+    if (_paopaoView && !_paopaoView.hidden && self.paopaoFollowSliding) {
         CGFloat xMargin = CGRectGetWidth(self.chartScrollView.frame) / (_xRow - 1);
         NSInteger leftIndex = ((self.selectIndex + 1) * xMargin - self.chartScrollView.contentOffset.x
                                + xMargin / 2) / xMargin;

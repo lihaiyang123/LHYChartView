@@ -18,15 +18,18 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     [self addFirstChartView];
-    [self addSecondChartView];
+//    [self addSecondChartView];
 }
 
 -(void)addFirstChartView{
     LHYChartView *incomeChartLineView = [[LHYChartView alloc]initWithFrame:CGRectMake(20, 50, [UIScreen mainScreen].bounds.size.width - 40, 300)];
     //是否默认选中第一个
-    incomeChartLineView.isShowFirstPaoPao = YES;
+//    incomeChartLineView.isShowFirstPaoPao = YES;
+    incomeChartLineView.showPaoPaoForIndex = 6;
     //是否有网格
     incomeChartLineView.isGrid = YES;
+    //是否显示所有点
+    incomeChartLineView.isShow = YES;
     //是否可以浮动
     incomeChartLineView.isFloating = NO;
     //显示多少行
@@ -62,8 +65,8 @@
     incomeChartLineView.lineLayerStyle = LHYLineLayerNone;
     
     incomeChartLineView.lineWidth = 3;
+    
     incomeChartLineView.paopaoBackGroundColor = [UIColor colorWithHexString:@"#111111" andAlpha:0.8];
-    //渐变效果的颜色组
     //渐变开始比例
     incomeChartLineView.proportion = 0.5;
     //折线图是否从零点开始画
@@ -72,8 +75,8 @@
     incomeChartLineView.leftColorStrArr = @[@"#6dd89c",@"#00a1eb",@"#bc69e0",@"#385af0"];
     //是否显示Y轴零位
     incomeChartLineView.isShowZero = YES;
-    
-    incomeChartLineView.paopaoFollowSliding = YES;
+    //泡泡是否跟随屏幕滑动而滑动
+    incomeChartLineView.paopaoFollowSliding = NO;
     //折线图数据
     incomeChartLineView.leftDataArr = @[@[@"-9999.4",@"30907",@"32010",@"33450",@"30069",@"31574",@"30692",@"33156",@"29808",@"31846",@"29772",@"29630"],@[@"46175",@"44915",@"36228",@"50473",@"28811",@"11876",@"23213",@"26847",@"27905",@"9562",@"34263",@"25459"],@[@"20549",@"15981",@"23375",@"20516",@"19208",@"15121",@"13776",@"16282",@"30748",@"26531",@"31298",@"33183"],@[@"11053",@"25811"]];
     //底部日期

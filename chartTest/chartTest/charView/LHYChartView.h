@@ -121,6 +121,11 @@ typedef NS_ENUM(NSInteger,LHYUnitStyle){
 @property (nonatomic,assign) BOOL isShowFirstPaoPao;
 //是否显示最后一个泡泡，默认为NO不显示。
 @property (nonatomic,assign) BOOL isShowLastPaoPao;
+
+/**
+ 指定泡泡在某个点上显示。不能和isShowFirstPaoPao、isShowLastPaoPao共用
+ */
+@property (nonatomic,assign) NSInteger showPaoPaoForIndex;
 //选中状态的圆，外圆是否是白色
 @property (nonatomic,assign) BOOL isShowCircleOutWhite;
 //折线图是否从零点开始画  YES为从1点开始画  NO为从零点开始画  默认为NO
@@ -155,7 +160,6 @@ typedef NS_ENUM(NSInteger,LHYUnitStyle){
  block返回泡泡选中的值
  */
 @property (nonatomic,copy) void (^returnPaoPaoDataBlock)(NSArray *array,NSString *title);
-
 
 -(void)show;
 //初始化
