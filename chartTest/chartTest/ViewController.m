@@ -60,7 +60,7 @@
     //设置折线样式
     incomeChartLineView.chartViewStyle = LHYChartViewMoreClickLine;
     //设置图层效果
-    incomeChartLineView.chartLayerStyle = LHYChartProjection;
+    incomeChartLineView.chartLayerStyle = LHYChartGradient;
     //设置折现效果
     incomeChartLineView.lineLayerStyle = LHYLineLayerNone;
     
@@ -68,7 +68,7 @@
     
     incomeChartLineView.paopaoBackGroundColor = [UIColor colorWithHexString:@"#111111" andAlpha:0.8];
     //渐变开始比例
-    incomeChartLineView.proportion = 0.5;
+    incomeChartLineView.proportion = 1;
     //折线图是否从零点开始画
     incomeChartLineView.hiddenZreo = YES;
     //设置颜色

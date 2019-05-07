@@ -47,10 +47,6 @@ typedef NS_ENUM(NSInteger,LHYUnitStyle){
 @property (nonatomic,strong) NSArray *leftDataArr;
 /** Y轴右边数据 没有不用传递 */
 @property (nonatomic,strong) NSArray *rightDataArr;
-/** X轴标题 */
-@property (nonatomic, strong) UILabel *titleOfX;
-/** Y轴标题 */
-@property (nonatomic, strong) UILabel *titleOfY;
 //线条宽度，默认为1
 @property (nonatomic, assign) CGFloat lineWidth;
 // 计算精度,10,100,1000,默认是1

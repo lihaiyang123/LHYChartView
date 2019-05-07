@@ -973,7 +973,7 @@
     gradientLayer.cornerRadius = 5;
     gradientLayer.masksToBounds = YES;
     gradientLayer.colors = @[(__bridge id)[color colorWithAlphaComponent:0.3].CGColor,(__bridge id)[color colorWithAlphaComponent:0].CGColor];
-    gradientLayer.locations = @[@(0.5f)];
+    gradientLayer.locations = @[@(self.proportion)];
     CALayer *baseLayer = [CALayer layer];
     [baseLayer addSublayer:gradientLayer];
     [baseLayer setMask:shadeLayer];
