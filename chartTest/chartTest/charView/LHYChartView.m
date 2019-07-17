@@ -1346,7 +1346,7 @@
     UIColor* titleColor = _paopaoTitleColor ? _paopaoTitleColor : [UIColor colorWithHexString:@"0x999999"];
     self.paopaoView.chartContentWidth = self.chartScrollView.contentSize.width;
     NSMutableArray * colorMarray = [NSMutableArray array];
-    if (colorArray.count != dataArr.count) {
+    if (colorArray.count < dataArr.count) {
         for (int s = 0; s < self.leftDataArr.count; s++) {
             NSArray * arr = self.leftDataArr[s];
             if (arr.count > index) {

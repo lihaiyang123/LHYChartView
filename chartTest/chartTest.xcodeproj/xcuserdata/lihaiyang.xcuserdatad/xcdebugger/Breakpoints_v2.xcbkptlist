@@ -20,12 +20,28 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "chartTest/charView/LHYChartView.m"
-            timestampString = "578890904.289444"
+            timestampString = "585020347.2939399"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "492"
-            endingLineNumber = "492"
-            landmarkName = "-onLoading"
+            startingLineNumber = "1381"
+            endingLineNumber = "1381"
+            landmarkName = "-setPaopaoUI:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "chartTest/charView/LHYChartView.m"
+            timestampString = "585020347.294266"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1349"
+            endingLineNumber = "1349"
+            landmarkName = "-setPaopaoUI:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
