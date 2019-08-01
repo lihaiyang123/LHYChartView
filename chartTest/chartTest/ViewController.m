@@ -69,6 +69,8 @@
     incomeChartLineView.paopaoBackGroundColor = [UIColor colorWithHexString:@"#111111" andAlpha:0.8];
     //渐变开始比例
     incomeChartLineView.proportion = 1;
+    
+    incomeChartLineView.isShowBezier = NO;
     //折线图是否从零点开始画
     incomeChartLineView.hiddenZreo = YES;
     //设置颜色
@@ -82,7 +84,7 @@
     //底部日期
     incomeChartLineView.dataArrOfX = @[@"4月",@"5月",@"6月",@"7月",@"8月",@"9月",@"10月",@"11月",@"12月",@"1月",@"2月",@"3月"];
     //泡泡标题
-    incomeChartLineView.paopaoTitleArray = @[@"2018-04",@"2018-05",@"2018-06",@"2018-07",@"2018-08",@"2018-09",@"2018-10",@"2018-11",@"2018-12",@"2019-01",@"2019-02",@"2019-03"];
+//    incomeChartLineView.paopaoTitleArray = @[@"2018-04",@"2018-05",@"2018-06",@"2018-07",@"2018-08",@"2018-09",@"2018-10",@"2018-11",@"2018-12",@"2019-01",@"2019-02",@"2019-03"];
     //返回泡泡选中值
     incomeChartLineView.returnPaoPaoDataBlock = ^(NSArray *array, NSString *title) {
         NSLog(@"%@-----%@",array,title);

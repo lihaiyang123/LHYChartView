@@ -1366,8 +1366,12 @@
         }
         CGPoint showPoint = [pointArray[index >= pointArray.count ? pointArray.count - 1 : index] CGPointValue];
         self.paopaoView.pointX = showPoint.x;
-        [self.paopaoView show:dataArr and:self.paopaoTitleArray[index] andTitleColor:titleColor colorArr:colorMarray];
-        [self returnBlock:dataArr title:self.paopaoTitleArray[index]];
+        NSString *title = @"";
+        if (self.paopaoTitleArray && index < self.paopaoTitleArray.count) {
+            title = self.paopaoTitleArray[index];
+        }
+        [self.paopaoView show:dataArr and:title andTitleColor:titleColor colorArr:colorMarray];
+        [self returnBlock:dataArr title:title];
     }else{
         NSArray * pointArray = self.leftPointArr[0];
         for (NSArray * arr in self.leftPointArr) {
@@ -1378,8 +1382,12 @@
         }
         CGPoint showPoint = [pointArray[index] CGPointValue];
         self.paopaoView.pointX = showPoint.x;
+        NSString *title = @"";
+        if (self.paopaoTitleArray && index < self.paopaoTitleArray.count) {
+            title = self.paopaoTitleArray[index];
+        }
         [self.paopaoView show:dataArr and:@"" andTitleColor:titleColor colorArr:colorMarray];
-        [self returnBlock:dataArr title:self.paopaoTitleArray[index]];
+        [self returnBlock:dataArr title:title];
     }
     [self addCircle:index];
 }
