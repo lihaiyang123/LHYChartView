@@ -20,11 +20,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "chartTest/charView/LHYChartView.m"
-            timestampString = "586321795.117103"
+            timestampString = "586432115.577266"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1349"
-            endingLineNumber = "1349"
+            startingLineNumber = "1364"
+            endingLineNumber = "1364"
             landmarkName = "-setPaopaoUI:"
             landmarkType = "7">
          </BreakpointContent>

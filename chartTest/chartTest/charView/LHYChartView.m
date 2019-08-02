@@ -579,6 +579,57 @@
             [self calculateLeftLabelMaxWidth];
             [self addLines1With:self.chartScrollView];
         }
+        if (_rightDataArr.count > 0) {
+            if (self.max) {
+                CGFloat jiange = [self spaceValue:@[[NSString stringWithFormat:@"%f",self.max]]];
+                if (jiange > _leftJiange) {
+                    _leftJiange = jiange;
+                }
+            }else{
+                for (int i = 0; i < _rightDataArr.count; i++) {
+                    if (_unitStyle == LHYUnitThousand) {
+                        _rightJiange = 1000;
+                    }else if (_unitStyle == LHYUnitWan){
+                        _rightJiange = 10000;
+                    }else if (_unitStyle == LHYUnitMillion){
+                        _rightJiange = 100000000;
+                    }else{
+                        _rightJiange = 1;
+                    }
+                    CGFloat jiange = [self spaceValue:_rightDataArr[i]];
+                    if (jiange > _rightJiange) {
+                        _rightJiange = jiange;
+                    }
+                }
+            }
+            
+            [self addLeftViews];
+            [self setChartViewContentSize];
+            [self calculateLeftLabelMaxWidth];
+            [self addLines1With:self.chartScrollView];
+            NSMutableArray * pointMarray = [NSMutableArray array];
+            for (int i = 0; i < _rightDataArr.count; i++) {
+                NSArray * dataArray = _rightDataArr[i];
+                [pointMarray addObject:[self addDataPointWith:self.chartScrollView andArr:dataArray andInterval:_rightJiange]];//添加点
+            }
+            [self.rightPointArr addObjectsFromArray:pointMarray];
+            for (int i = 0; i<pointMarray.count; i++) {
+                NSArray * colorArray = [NSArray array];
+                if (i < _colors.count) {
+                    colorArray = _colors[i];
+                }
+                self.isShowBezier ? [self addBezierPoint:pointMarray[i] andColor:_rightColorStrArr[i<_rightColorStrArr.count?i:_rightColorStrArr.count-1] andColors:colorArray] : [self addLinePoint:pointMarray[i] andColor:_rightColorStrArr[i<_rightColorStrArr.count?i:_rightColorStrArr.count-1] andColors:colorArray];;
+            }
+            ////添加连线
+            [self addRightViews];
+        }
+        
+        if (_leftDataArr.count <= 0 && _rightDataArr.count <= 0) {
+            [self addLeftViews];
+            [self setChartViewContentSize];
+            [self addLines1With:self.chartScrollView];
+        }
+        
         NSMutableArray * pointMarray = [NSMutableArray array];
         for (int i = 0; i < _leftDataArr.count; i++) {
             NSArray * dataArray = _leftDataArr[i];
@@ -593,69 +644,33 @@
             }
             self.isShowBezier ? [self addBezierPoint:pointMarray[i] andColor:_leftColorStrArr[i<_leftColorStrArr.count?i:_leftColorStrArr.count-1] andColors:colorArray] : [self addLinePoint:pointMarray[i] andColor:_leftColorStrArr[i<_leftColorStrArr.count?i:_leftColorStrArr.count-1] andColors:colorArray];
         }
-    }
-    if (_rightDataArr.count > 0) {
-        if (self.max) {
-            CGFloat jiange = [self spaceValue:@[[NSString stringWithFormat:@"%f",self.max]]];
-            if (jiange > _leftJiange) {
-                _leftJiange = jiange;
-            }
-        }else{
-            for (int i = 0; i < _rightDataArr.count; i++) {
-                if (_unitStyle == LHYUnitThousand) {
-                    _rightJiange = 1000;
-                }else if (_unitStyle == LHYUnitWan){
-                    _rightJiange = 10000;
-                }else if (_unitStyle == LHYUnitMillion){
-                    _rightJiange = 100000000;
-                }else{
-                    _rightJiange = 1;
-                }
-                CGFloat jiange = [self spaceValue:_rightDataArr[i]];
-                if (jiange > _rightJiange) {
-                    _rightJiange = jiange;
-                }
-            }
-        }
         
-        [self addLeftViews];
-        [self setChartViewContentSize];
-        [self calculateLeftLabelMaxWidth];
-        [self addLines1With:self.chartScrollView];
-        NSMutableArray * pointMarray = [NSMutableArray array];
-        for (int i = 0; i < _rightDataArr.count; i++) {
-            NSArray * dataArray = _rightDataArr[i];
-            [pointMarray addObject:[self addDataPointWith:self.chartScrollView andArr:dataArray andInterval:_rightJiange]];//添加点
-        }
-        [self.leftPointArr addObjectsFromArray:pointMarray];
-        for (int i = 0; i<pointMarray.count; i++) {
-            NSArray * colorArray = [NSArray array];
-            if (i < _colors.count) {
-                colorArray = _colors[i];
+        if (self.leftPointArr.count > 0) {
+            for (int i = 0; i < self.leftPointArr.count; i++) {
+                NSMutableArray * pointMarray = [NSMutableArray arrayWithArray:self.leftPointArr[i]];
+                if (pointMarray.count > 2 && pointMarray.count == self.dataArrOfX.count) {
+                    [pointMarray removeObjectAtIndex:pointMarray.count - 1];
+                    [pointMarray removeObjectAtIndex:0];
+                }else if (pointMarray.count > 0){
+                    [pointMarray removeObjectAtIndex:0];
+                }
+                self.leftPointArr[i] = pointMarray;
             }
-            self.isShowBezier ? [self addBezierPoint:pointMarray[i] andColor:_rightColorStrArr[i<_rightColorStrArr.count?i:_rightColorStrArr.count-1] andColors:colorArray] : [self addLinePoint:pointMarray[i] andColor:_rightColorStrArr[i<_rightColorStrArr.count?i:_rightColorStrArr.count-1] andColors:colorArray];;
         }
-        ////添加连线
-        [self addRightViews];
+        if (self.rightPointArr.count > 0) {
+            for (int i = 0; i < self.rightPointArr.count; i++) {
+                NSMutableArray * pointMarray = [NSMutableArray arrayWithArray:self.rightPointArr[i]];
+                if (pointMarray.count > 2 && pointMarray.count == self.dataArrOfX.count) {
+                    [pointMarray removeObjectAtIndex:pointMarray.count - 1];
+                    [pointMarray removeObjectAtIndex:0];
+                }else if (pointMarray.count > 0){
+                    [pointMarray removeObjectAtIndex:0];
+                }
+                self.rightPointArr[i] = pointMarray;
+            }
+        }
     }
     
-    if (_leftDataArr.count <= 0 && _rightDataArr.count <= 0) {
-        [self addLeftViews];
-        [self setChartViewContentSize];
-        [self addLines1With:self.chartScrollView];
-    }
-    if (self.leftPointArr.count > 0) {
-        for (int i = 0; i < self.leftPointArr.count; i++) {
-            NSMutableArray * pointMarray = [NSMutableArray arrayWithArray:self.leftPointArr[i]];
-            if (pointMarray.count > 2 && pointMarray.count == self.dataArrOfX.count) {
-                [pointMarray removeObjectAtIndex:pointMarray.count - 1];
-                [pointMarray removeObjectAtIndex:0];
-            }else if (pointMarray.count > 0){
-                [pointMarray removeObjectAtIndex:0];
-            }
-            self.leftPointArr[i] = pointMarray;
-        }
-    }
     [self addBottomViewsWith:self.chartScrollView];
 }
 
@@ -1397,6 +1412,7 @@
         [circleView removeFromSuperview];
     }
     NSMutableArray * leftColorArr = [NSMutableArray array];
+    NSMutableArray * rightColorArr = [NSMutableArray array];
     switch (_chartViewStyle) {
         case 0:
             for (int i = 0; i < _leftColorStrArr.count; i++) {
@@ -1413,14 +1429,17 @@
             [self drawCircle:index arr:self.leftPointArr color:leftColorArr];
             break;
         case 2:
+            [self.charCircleViewArr removeAllObjects];
             for (int i = 0; i < _leftColorStrArr.count; i++) {
                 [leftColorArr addObject:_leftColorStrArr[i]];
+                [self drawCircle:index arr:self.leftPointArr color:leftColorArr];
             }
             for (int i = 0; i < _rightColorStrArr.count; i++) {
-                [leftColorArr addObject:_rightColorStrArr[i]];
+                [rightColorArr addObject:_rightColorStrArr[i]];
+                [self drawCircle:index arr:self.rightPointArr color:rightColorArr];
             }
-            [self.charCircleViewArr removeAllObjects];
-            [self drawCircle:index arr:self.leftPointArr color:leftColorArr];
+            
+            
             break;
         default:
             break;
